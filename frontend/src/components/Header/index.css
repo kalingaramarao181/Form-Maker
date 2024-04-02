@@ -1,0 +1,24 @@
+.nav{
+    background-color: #36366f;
+    display: flex;
+    justify-content: space-around;
+    padding: 3vh;
+  
+  }
+  .nav-Home{
+    color: white;
+    text-decoration: none;
+    font-size: 1.6vw;
+    font-family: roboto;
+  }
+  .nav-Home-logo{
+    font-size: 1.8vw;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0.5vh;
+    font-weight: 600;
+    width: 5vw;
+    text-align: center;
+    text-decoration: none;
+    font-family: "cursive";
+  }
