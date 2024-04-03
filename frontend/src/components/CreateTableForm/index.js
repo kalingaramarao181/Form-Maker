@@ -3,7 +3,7 @@ import axios from 'axios';
 import "./index.css"
 
 const CreateTableForm = () => {
-  const [tableName, setTableName] = useState('');
+  const [tbName, setTableName] = useState('');
   const [columns, setColumns] = useState([{ name: '', type: '' }]);
 
   const handleAddColumn = () => {
@@ -24,27 +24,30 @@ const CreateTableForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const tableName = tbName.split(" ").join("")
     try {
       await axios.post('http://localhost:4000/create-table', { tableName, columns });
       alert('Table created successfully');
+      window.location.reload()
     } catch (error) {
       console.error('Error creating table:', error);
       alert('Error creating table');
     }
     setTableName('')
     setColumns([{ name: '', type: '' }])
+
   };
 
   return (
     <div className='table-create-farm-container'>
       <form onSubmit={handleSubmit} className='table-create-farm'>
-        <h1 className='table-create-farm-heading'>Table Creation</h1>
+        <h1 className='table-create-farm-heading'>Create Survey</h1>
         <input
           className='table-create-table-name-input'
           type="text"
-          value={tableName}
+          value={tbName}
           onChange={(e) => setTableName(e.target.value)}
-          placeholder='Enter Name of the Table'
+          placeholder='Enter Name of the Survey'
         />
         {columns.map((column, index) => (
           <div className='table-create-input-container' key={index}>
@@ -53,7 +56,7 @@ const CreateTableForm = () => {
               type="text"
               value={column.name}
               onChange={(e) => handleColumnNameChange(index, e.target.value)}
-              placeholder='Enter Name of the Column'
+              placeholder='Enter Name'
             />
 
             <select className='table-create-add-column-input' value={column.type} onChange={(e) => handleColumnTypeChange(index, e.target.value)} >

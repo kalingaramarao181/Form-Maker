@@ -69,6 +69,21 @@ app.post('/create-table', (req, res) => {
     });
 });
 
+
+app.post("/post-to/:tableName", (req, res) => {
+  const tableName = req.params.tableName
+  const {...data} = req.body
+  const keys = Object.keys(data)
+  const values = Object.values(data)
+  const sql = `INSERT INTO ${tableName} (${keys.map((each) => "`"+each+"`")}) VALUES (?)`
+  pool.query(sql, [values], (err,data) => {
+    if (err) return res.json(err)
+    return res.json(data)
+  })
+  console.log(values)
+
+})
+
 //GET COLUMNS FROM TABLE
 app.get("/columns/:tableName", (req, res) => {
     const tableName = req.params.tableName;

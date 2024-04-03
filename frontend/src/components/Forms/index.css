@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 2vh;
+    padding: 3vh;
 }
 
 .forms-table-view-container{
@@ -12,82 +12,70 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 2vh;
+    width: 95vw;
 }
 
 .forms-table-view-button{
     background-color: transparent;
     border: none;
-    font-family: "Roboto";
-    font-size: 1.2w;
-    margin-right: 0.5vw;
+    font-family: "Roboto"; 
+    font-size: 1.5vw;
+    margin-right: 1vw;
     padding: 0.5vw;
     border-radius: 5px;
-    border:1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-weight: 600;
+    box-shadow: 0 2px 8px 0 rgba(14, 13, 13, 0.678), 0 4px 20px 0 rgba(0, 0, 0, 0.603);
+    cursor: pointer;
+}
+
+.forms-search-input{
+    margin-bottom: 1vw;
+    margin-top: 0.5vw;
+    padding: 0.5vw;
+    border-radius: 5px;
+    width: 24vw;
+    align-self: center;
+    margin-bottom: 3vh;
+}
+.forms-table-search-data-err{
+    align-self: center;
+    font-weight: bold;
 }
 
 .forms-table-view-button-add{
-    background-color: transparent;
+    background-color: white;
     border: none;
-    font-family: "Roboto";
-    font-size: 1.2w;
-    margin-right: 0.5vw;
+    font-size: 1.2vw;
     padding: 0.5vw;
     border-radius: 5px;
-    border:1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    height: 12vh;
+    height: 21vh;
+    box-shadow: 0 2px 8px 0 rgba(14, 13, 13, 0.678), 0 4px 20px 0 rgba(0, 0, 0, 0.603);
+    cursor: pointer;
 }
 .forms-table-view-button-icon{
     color:rgb(78, 78, 228);
-    font-size:8vh;
+    font-size:16vh;
+}
+.forms-table-heading{
+    font-size: 3vw;
+    color: #36366f;
+    margin-left: 1.5vw;
 }
 .forms-table-view-button-add-icon{
     color:rgb(233, 149, 70);
-    font-size:8vh;
+    font-size:17vh;
 }
 .forms-table-form-container{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-}
-.forms-table-form{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 1.5vw;
-    border-radius: 10px;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-}
-.forms-table-input-label{
-    align-self: flex-start;
-    font-size: 1vw;
-    font-weight: 800;
-}
-.forms-table-name-input{
-    margin-bottom: 1vw;
-    margin-top: 0.5vw;
-    padding: 0.5vw;
-    border-radius: 5px;
-    width: 24vw;
-}
-.forms-table-submit-button{
-    padding: 1vw;
-    font-size: 1vw;
-    border-radius: 5px;
-    border: none;
-    background-color: #cd6cf7;
-    color: white;
-    align-self: flex-end;
 }
