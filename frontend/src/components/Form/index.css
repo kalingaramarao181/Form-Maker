@@ -3,14 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    padding:5vw;
 }
 
 .forms-table-form{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 1.5vw;
     border-radius: 10px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;

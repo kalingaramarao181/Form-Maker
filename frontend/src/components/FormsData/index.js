@@ -5,7 +5,7 @@ import { FaWpforms } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const Forms = (props) => {
+const FormsData = (props) => {
     const {history} = props
     const [tables, setTables] = useState([])
     const [searchValue, setSearchValue] = useState([])
@@ -28,12 +28,12 @@ const Forms = (props) => {
 
     const onClickFormTab = (tbName) => {
         localStorage.setItem("tableName", tbName)
-        history.push("/survey-form")
+        history.push("/survey-form-data")
     }
 
     return (
         <div className="forms-table-view-main-container">
-        <h1 className="forms-table-heading">Forms:</h1>
+        <h1 className="forms-table-heading">Forms Data</h1>
         <input onChange={(e) => setSearchValue(e.target.value)} type="search" placeholder="Search your Form" className="forms-search-input"/>
         <div className="forms-table-view-container" style={newData.length === 0 ? {flexDirection:"column"}:{flexDirection:"row"}}>
             {newData.length === 0 ? <p className="forms-table-search-data-err">No Data Found</p>:<>
@@ -59,4 +59,4 @@ const Forms = (props) => {
     )
 }
 
-export default Forms
+export default FormsData

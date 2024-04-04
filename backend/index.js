@@ -81,7 +81,15 @@ app.post("/post-to/:tableName", (req, res) => {
     return res.json(data)
   })
   console.log(values)
+})
 
+app.get("/survey-form-data/:tableName", (req, res) => {
+  const tableName = req.params.tableName
+  const sql = `SELECT * FROM ${tableName}`
+  pool.query(sql, (err, data) =>{
+    if (err) return res.json(err)
+    return res.json(data)
+  })
 })
 
 //GET COLUMNS FROM TABLE

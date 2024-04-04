@@ -3,10 +3,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    min-height: 80vh;
     padding: 3vh;
-    background-image: url("https://www.shutterstock.com/image-photo/blurred-office-background-260nw-1060494611.jpg");
-    background-size: cover;
 }
 
 .forms-table-view-container{
@@ -14,9 +11,10 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    padding: 2vh;
     flex-wrap: wrap;
-    padding: 10vw;
     width: 90vw;
+    align-self: center;
 }
 
 .forms-table-view-button{
@@ -25,7 +23,6 @@
     font-family: "Roboto"; 
     font-size: 1.5vw;
     margin-right: 1vw;
-    margin-bottom: 1vw;
     padding: 0.5vw;
     border-radius: 5px;
     display: flex;
@@ -73,7 +70,6 @@
     font-size: 3vw;
     color: #36366f;
     margin-left: 1.5vw;
-    border-bottom: 2px solid #36366f;
 }
 .forms-table-view-button-add-icon{
     color:rgb(233, 149, 70);

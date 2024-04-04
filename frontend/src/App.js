@@ -4,7 +4,8 @@ import CreateTableForm from './components/CreateTableForm';
 import Forms from './components/Forms';
 import Header from './components/Header';
 import Form from './components/Form';
-
+import FormsData from './components/FormsData';
+import SurveyFormData from './components/SurveyFormData';
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,8 @@ function App() {
         <Route path='/create-form' exact component={CreateTableForm} />
         <Route path='/Forms' exact component={Forms} />
         <Route path="/survey-form" exact component={Form} />
+        <Route path="/forms-data" exact component={FormsData} />
+        <Route path="/survey-form-data" exact component={SurveyFormData} />
       </Switch>
     </BrowserRouter>
   );

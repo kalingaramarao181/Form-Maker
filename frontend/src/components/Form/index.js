@@ -21,8 +21,13 @@ const Form = () => {
     const onSubmitForm = (e) => {
         e.preventDefault()
         axios.post("http://localhost:4000/post-to/" + tableName, {...data})
-        .then(res => console.log(res.data))
+        .then(res => {
+            console.log(res.data)
+            setData({})
+        })
         .catch(err => console.log(err))
+        window.location.reload()
+        
     }
     return (
         <div className="form-table-form-container">
@@ -32,11 +37,13 @@ const Form = () => {
                     if (eachData.name === "id"){
                         return null
                     }
+                    console.log(data)
+                    
                     return (
                         <div className="forms-table-form-container">
                             <label className="forms-table-input-label">{eachData.name}:</label>
-                            {eachData.type === "text" ? <textarea onChange={inputHandler} cols={30} rows={6} className="forms-table-name-input" type={eachData.type} name={eachData.name} placeholder={`Enter ${eachData.name}`}/> :
-                            <input name={eachData.name} onChange={inputHandler} className="forms-table-name-input" type={eachData.type} placeholder={`Enter ${eachData.name}`}/>}
+                            {eachData.type === "text" ? <textarea value={data[eachData.name]} onChange={inputHandler} cols={30} rows={6} className="forms-table-name-input" type={eachData.type} name={eachData.name} placeholder={`Enter ${eachData.name}`}/> :
+                            <input value={data[eachData.name]} name={eachData.name} onChange={inputHandler} className="forms-table-name-input" type={eachData.type} placeholder={`Enter ${eachData.name}`}/>}
                         </div>
                     )
                 })}

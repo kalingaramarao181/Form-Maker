@@ -1,20 +1,22 @@
 .table-create-farm-container{
-    height: 100vh;
+    height: 88vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url("https://www.bedrockhr.co.uk/wp-content/uploads/2019/07/services1.jpeg");
+    background-size: cover;
 }
 .table-create-farm{
     width: 30vw;
     padding: 1.5vw;
     border-radius: 10px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
 }
 .table-create-input-label{
     align-self: flex-start;
