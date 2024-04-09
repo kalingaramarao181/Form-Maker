@@ -1,0 +1,58 @@
+.admin-main-container {
+    background-image: url("https://img.freepik.com/premium-vector/padlock-with-keyhole-icon-personal-data-security-illustrates-cyber-data-information-privacy-idea_43778-503.jpg?w=900");
+    background-size: cover;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(15px);
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    margin: 4vh;
+    background-color: white;
+    width: 35vw;
+    border-radius: 1vh;
+    box-shadow: 0 2px 8px 0 rgba(241, 238, 238, 0.2), 0 4px 20px 0 rgba(248, 231, 231, 0.555);
+    padding: 3vh;
+}
+
+.main-heading {
+    margin-top: 0px;
+    color: white;
+    text-align: center;
+    font-size: 6vh;
+    font-family: roboto;
+    padding: 4vh;
+}
+
+.admin-login-heading {
+    text-align: center;
+    font-family: roboto;
+}
+
+.admin-input {
+    padding: 1.6vh;
+    margin: 1vh;
+    border-radius: 0.5vh;
+}
+
+.admin-labels {
+    font-size: 1.5vw;
+    font-family: roboto;
+    padding: 1vh;
+    padding-bottom: 0px;
+}
+
+.admin-submit {
+    padding: 1.6vh;
+    margin: 1vh;
+    border-radius: 0.5vh;
+    background-color: #04AA6D;
+    border: none;
+    font-size: 1.3vw;
+    color: white;
+    font-weight: bold;
+}

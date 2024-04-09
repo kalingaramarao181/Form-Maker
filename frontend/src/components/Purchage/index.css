@@ -1,0 +1,30 @@
+.purchage-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:80vh;
+}
+.purchage-heading-span{
+    color: #9F4816;
+    text-decoration: underline;
+}
+.purchage-heading{
+    font-size: 4vw;
+    font-weight: bold;
+    color: #4A1351;
+    font-family: roboto;
+}
+.purchage-descreption{
+    font-size: 2vw;
+    font-weight: 600;
+    font-family: roboto;
+}
+.purchage-buy-button{
+    background-color: #9F4816;
+    color: white;
+    height: 7vh;
+    width: 12vw;
+    border: none;
+    border-radius: 5px;
+}

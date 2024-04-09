@@ -1,0 +1,52 @@
+.containerhome {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 90vh;
+    background: rgba(102, 102, 102, 0.7) url("https://img.freepik.com/premium-photo/desk-with-laptop-papers-it_902049-11200.jpg");
+    background-size: cover;
+    background-blend-mode: darken;
+}
+.home-content {
+    width: 37vw;
+    padding-bottom: 7vh;
+    display: flex;
+    flex-direction: column;
+}
+.home-main-heading {
+    font-family: roboto;
+    font-size: 2.7vw;
+    margin-bottom: 0px;
+    color: white;
+    font-weight: bold;
+}
+.home-main-para {
+    align-items: center;
+    font-family: roboto;
+    color: white;
+}
+.main-image {
+    height: 50vh;
+}
+.home-input {
+    padding: 1vw;
+    border-radius: 5px;
+}
+.home-button {
+    padding: 0.8vw;
+    margin-top: 2vh;
+    font-size: 2.5vh;
+    font-weight: bold;
+    background-color: #36366f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.home-button:hover {
+    background-color: #3131e6;
+
+}
+.home-span {
+    color: rgb(245, 180, 40);
+}

@@ -5,6 +5,7 @@ import "./index.css"
 const CreateTableForm = () => {
   const [tbName, setTableName] = useState('');
   const [columns, setColumns] = useState([{ name: '', type: '' }]);
+  const [submitted, setSubmitted] = useState(false); // State to track form submission
 
   const handleAddColumn = () => {
     setColumns([...columns, { name: '', type: '' }]);
@@ -25,18 +26,28 @@ const CreateTableForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const tableName = tbName.split(" ").join("")
+    if (localStorage.getItem("candidateData")){
+    const localCandidateData = JSON.parse(localStorage.getItem("candidateData"))
+    const {name, email} = localCandidateData
     try {
-      await axios.post('http://localhost:4000/create-table', { tableName, columns });
+      await axios.post('http://localhost:4000/create-table', { tableName, columns, name, email });
       alert('Table created successfully');
-      window.location.reload()
+      setSubmitted(true); // Set submitted to true after successful submission
     } catch (error) {
       console.error('Error creating table:', error);
       alert('Error creating table');
     }
-    setTableName('')
-    setColumns([{ name: '', type: '' }])
-
+  }
   };
+
+  if (submitted) {
+    return (
+      <div className='table-create-farm-container'>
+        <h1>Form created successfully!</h1>
+        <h1>Thank You</h1>
+      </div>
+    );
+  }
 
   return (
     <div className='table-create-farm-container'>
@@ -58,7 +69,6 @@ const CreateTableForm = () => {
               onChange={(e) => handleColumnNameChange(index, e.target.value)}
               placeholder='Enter Name'
             />
-
             <select className='table-create-add-column-input' value={column.type} onChange={(e) => handleColumnTypeChange(index, e.target.value)} >
               <option value="">--Select Type---</option>
               <option value="INT">Number</option>
