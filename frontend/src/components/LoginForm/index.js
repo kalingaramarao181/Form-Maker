@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 
 const LoginForm = (props) => {
     const { history } = props;
+    const [errorMessage, setErrorMessage] = useState()
     const [data, setData] = useState({
         username: "",
         password: "",
@@ -18,24 +19,27 @@ const LoginForm = (props) => {
         e.preventDefault();
         axios.post("http://localhost:4000/admin-login", { ...data })
             .then((res) => {
-                console.log(res.data)
+                if (res.statusText === "OK"){
+                Cookies.set("adminToken", res.data.jwtToken, {expires: 1/24})
+                history.replace("/admin")
+                }
             })
             .catch((error) => {
                 if (error.response) {
                     console.log('Server responded with status code:', error.response.status);
                     if (error.response.status === 400) {
                       // Handle 400 Bad Request (e.g., display error message to user)
-                      console.log(error.response.data.error);
+                      setErrorMessage(error.response.data.error);
                     } else {
                       // Handle other status codes
-                      console.log('Unexpected error:', error.response.data.error);
+                      setErrorMessage('Unexpected error:', error.response.data.error);
                     }
                   } else if (error.request) {
                     // The request was made but no response was received
-                    console.log('No response received from server');
+                    setErrorMessage('No response received from server');
                   } else {
                     // Something happened in setting up the request that triggered an error
-                    console.log('Error setting up request:', error.message);
+                    setErrorMessage('Error setting up request:', error.message);
                   }
             });
         setData({
@@ -47,7 +51,6 @@ const LoginForm = (props) => {
         <>
             <div className="admin-main-container">
                 <h1 className="main-heading">ADMIN PANNEL</h1>
-
                 <form className="admin-container" onSubmit={submithandler}>
                     <h1 className="admin-login-heading">Admin Login</h1>
                     <label className="admin-labels">UserName</label>
@@ -71,6 +74,7 @@ const LoginForm = (props) => {
                         required
                     />
                     <input type="submit" className="admin-submit" />
+                    {errorMessage && <p className="login-error-message">{errorMessage}</p>}
                 </form>
             </div>
         </>

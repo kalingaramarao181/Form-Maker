@@ -126,6 +126,7 @@ app.get("/columns/:tableName", (req, res) => {
   });
 });
 
+//GET CANDIDATE DATA USING EMAIL
 app.get("/candidate-data/:email", (req, res) => {
   const email = req.params.email;
   const sql = 'SELECT tableid FROM forminfrormativedata WHERE email = ?';
@@ -138,6 +139,15 @@ app.get("/candidate-data/:email", (req, res) => {
   });
 });
 
+//GET CLIENT DATA
+app.get("/client-data", (req, res) => {
+  const sql = "SELECT * FROM client"
+  pool.query(sql, (err, data) => {
+    if(err) return res.json(err)
+    return res.json(data)
+  })
+})
+
 
 
 
@@ -147,16 +157,18 @@ app.get("/candidate-data/:email", (req, res) => {
 
 
 //CREATE SURVEY API
-app.post('/create-table', (req, res) => {
+app.post('/create-table', async (req, res) => {
   const { tableName, columns, name, email } = req.body;
   const uniqueNumber = generateUniqueThreeDigitNumber();
-  const tableId = name.slice(0,4)+uniqueNumber
+  const tableId = name.slice(0,4) + uniqueNumber;
 
   // Validate input
   if (!tableName || !columns || !Array.isArray(columns)) {
     return res.status(400).json({ error: 'Invalid input' });
   }
-  let createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName+tableId} (`;
+
+  // Create the CREATE TABLE query
+  let createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName + tableId} (`;
   createTableQuery += `id INT AUTO_INCREMENT PRIMARY KEY, `; // Add id column
 
   columns.forEach((column, index) => {
@@ -171,24 +183,27 @@ app.post('/create-table', (req, res) => {
 
   createTableQuery += ')';
 
-  
-  //CREATE TABLE IN DATABASE
+  // Execute the CREATE TABLE query
   pool.query(createTableQuery, (err, result) => {
     if (err) {
       console.error('Error creating table:', err);
       return res.status(500).json({ error: 'Error creating table' });
     }
     console.log(`${tableName} table created or already exists`);
-    res.status(200).json({ message: `${tableName} table created or already exists` });
+
+    // After successfully creating the table, insert data into 'forminfrormativedata' table
+    const insertDataQuery = 'INSERT INTO forminfrormativedata (`name`, `email`, `tableid`) VALUES (?, ?, ?)';
+    const values = [name, email, tableId];
+
+    pool.query(insertDataQuery, values, (err, data) => {
+      if (err) {
+        console.error('Error inserting data:', err);
+        return res.status(500).json({ error: 'Error inserting data' });
+      }
+      console.log('Data inserted successfully:', data);
+      res.status(200).json({ message: `${tableName} table created, data inserted` });
+    });
   });
-
-  const sql = 'INSERT INTO forminfrormativedata (`name`, `email`, `tableid`) VALUES (?)'
-  const values = [name, email, tableId]
-
-  pool.query(sql, [values], (err, data) => {
-    if(err) return console.log(err);
-    return console.log(data);
-  })
 });
 
 //POST SURVEY DATA FROM SELECTOD FORM
@@ -214,7 +229,6 @@ app.post("/signup/:tableName", (req, res) => {
   const values = Object.values(data)
   const sql = `INSERT INTO ${tableName} (${keys.map((each) => "`" + each + "`")}) VALUES (?)`
   const token = generateToken({ userId: email });
-  console.log(token)
   pool.query(sql, [values], (err, data) => {
     if (err) return res.json(err)
     return res.json({ token });
@@ -244,6 +258,15 @@ app.post("/admin-login", (req, res) => {
 })
 
 
+//DELETE CLIENT
+app.delete("/delete-client/:id", (req, res) => {
+  const sql = "DELETE FROM client WHERE id = (?)"
+  const id = [req.params.id]
+  pool.query(sql, [id], (err, data) => {
+    if (err) return res.json(err)
+    return res.json(data)
+  })
+})
 
 
 app.get("/dummy", (req, res) => {

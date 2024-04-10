@@ -1,0 +1,153 @@
+.containerform {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 90vh;
+  background-size: cover;
+  background-blend-mode: darken;
+
+}
+
+.form-feature-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1vw;
+  background-color: #707977;
+  margin: 1vh;
+}
+
+.form-features {
+  display: flex;
+  justify-content: space-around;
+  align-self: flex-end;
+  width: 50vw;
+  font-weight: bold;
+  font-family: roboto;
+  font-size: 2.5vh;
+  margin: 2vw;
+  margin-bottom: 0vw;
+}
+
+.form-content {
+  width: 37vw;
+  padding-bottom: 7vh;
+  display: flex;
+  flex-direction: column;
+  order: 0;
+}
+
+.containerform2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 90vh;
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.form-content1 {
+  width: 37vw;
+  padding-bottom: 7vh;
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+
+.forn-content-2 {
+  order: 0;
+}
+.form-main-heading {
+  font-family: roboto;
+  font-size: 2.7vw;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.form-main-para {
+  align-items: center;
+  font-family: roboto;
+}
+.form-main-image {
+  height: 70vh;
+}
+.form-input {
+  padding: 1vw;
+  border-radius: 5px;
+}
+.form-button {
+  padding: 0.8vw;
+  margin-top: 2vh;
+  font-size: 2.5vh;
+  font-weight: bold;
+  background-color: #36366f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.form-button:hover {
+  background-color: #3131e6;
+}
+.form-span {
+  color: rgb(245, 180, 40);
+}
+
+.form-heading-2page {
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 6vh;
+  text-align: center;
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+.footer2 {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.fotter-containt {
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 2vw;
+}
+
+.fotter-containt-icons-linkedin {
+  font-size: 2.5vw;
+  color: black;
+}
+
+.fotter-containt-icons-facebook {
+  font-size: 2.5vw;
+  color: black;
+}
+
+.fotter-containt-icons-insta {
+  font-size: 2.5vw;
+  color: black;
+}
+
+.fotter-containt-icons-twitter {
+  font-size: 4vw;
+  color: black;
+}
+
+.all-footer-icons {
+  padding-top: 9vh;
+  margin-left: 2vw;
+}

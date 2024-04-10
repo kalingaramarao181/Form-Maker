@@ -1,0 +1,60 @@
+.clientdata-head {
+    font-family: roboto;
+    font-weight: bold;
+    padding-left: 2vw;
+}
+
+.main-table {
+    border: 2px solid black;
+    margin: 2vw;
+}
+.table-head {
+    display: flex;
+    flex-direction: row;
+}
+
+.table-header {
+    padding: 1vw;
+    padding-right: 3vw;
+    border-bottom: 1px solid black;
+}
+
+.tabledata-details {
+    border-bottom: 1px solid black;
+}
+
+.delete-button {
+    background-color: rgb(255, 31, 31);
+    border: none;
+    border-radius: 0.3vw;
+    color: white;
+    font-size: 1.53vw;
+    width: 9vw;
+    height:5vh;
+    font-family: roboto;
+    padding: 0.5vh;
+}
+.data-button{
+    background-color: rgb(26, 173, 65);
+    border: none;
+    border-radius: 0.3vw;
+    color: white;
+    font-size: 1.53vw;
+    font-family: roboto;
+    padding: 0.5vh;
+    width: 9vw;
+    height:5vh;
+}
+
+.delete-button:hover {
+    background-color: rgb(255, 31, 31);
+    border: none;
+    border-radius: 0.3vw;
+    color: white;
+    font-size: 2.8vh;
+    box-shadow: 0 2px 8px 0 rgba(10, 10, 10, 0.2), 0 4px 20px 0 rgba(24, 16, 16, 0.555);
+    font-family: roboto;
+}
+.client-servey-form-details-heading-span{
+    color:rgb(233, 149, 70);
+}

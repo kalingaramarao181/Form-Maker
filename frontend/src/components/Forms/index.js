@@ -3,7 +3,7 @@ import axios from "axios"
 import "./index.css"
 import { FaWpforms } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 const Forms = (props) => {
     const {history} = props
@@ -59,4 +59,4 @@ const Forms = (props) => {
     )
 }
 
-export default Forms
+export default withRouter(Forms)

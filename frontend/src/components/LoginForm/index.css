@@ -56,3 +56,9 @@
     color: white;
     font-weight: bold;
 }
+.login-error-message{
+    color: red;
+    font-size: 1.5vw;
+    text-align: right;
+    margin-top: 0px;
+}

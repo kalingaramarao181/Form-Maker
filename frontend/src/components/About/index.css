@@ -1,0 +1,174 @@
+.containerabout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-size: cover;
+    background-blend-mode: darken;
+    padding-top: 10vh;
+
+}
+
+
+.about-content {
+    width: 37vw;
+    padding-bottom: 7vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-main-heading {
+    font-family: roboto;
+    font-size: 2.7vw;
+    margin-bottom: 0px;
+    font-weight: bold;
+
+
+}
+
+.about-main-para {
+    align-items: center;
+    font-family: roboto;
+
+
+
+}
+
+.about-image {
+    height: 50vh;
+}
+
+.about-input {
+    padding: 1vw;
+    border-radius: 5px;
+
+}
+
+.about-button {
+    padding: 0.8vw;
+    margin-top: 2vh;
+    font-size: 2.5vh;
+    font-weight: bold;
+    background-color: #36366f;
+    border: none;
+    border-radius: 5px;
+}
+
+.about-button:hover {
+    background-color: #3131e6;
+
+}
+
+.about-span {
+    color: rgb(245, 180, 40);
+}
+
+.about-feature-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    background-color: #707977;
+    margin: 1vh;
+
+
+}
+
+.about-features {
+    display: flex;
+    justify-content: space-around;
+    align-self: flex-end;
+    width: 50vw;
+    color: white;
+    font-weight: bold;
+
+
+
+}
+
+.about-header-content {
+    width: 50vw;
+    margin: 5vh;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+
+
+}
+
+.about-head-text {
+    text-align: center;
+    font-family: roboto;
+    font-weight: bold;
+    font-size: 3vw;
+    color: white;
+
+
+}
+
+.about-head-paragraph {
+    text-align: center;
+    font-family: roboto;
+    margin-top: 0px;
+    width: 45vw;
+    font-size: 1.3vw;
+    color: white;
+
+
+
+}
+
+.about-button-top {
+    padding: 2vh;
+    font-weight: bold;
+    font-family: roboto;
+    width: 13vw;
+    border-radius: 0.5vh;
+    border: none;
+    margin-top: 2vh;
+    background-color: #f1aa10;
+    font-size: 2vh;
+}
+
+.about-feature-icon-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-iconfile {
+    font-size: 5vh;
+    color: white;
+}
+
+.containeraboutbelow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-size: cover;
+    background-blend-mode: darken;
+    padding-top: 10vh;
+
+
+}
+
+.about-content2 {
+    width: 37vw;
+    padding-bottom: 7vh;
+    display: flex;
+    flex-direction: column;
+    order: 1;
+}
+
+.about-swap-last {
+    order: 0;
+
+}
+
+.videotag {
+    height: 58vh;
+}

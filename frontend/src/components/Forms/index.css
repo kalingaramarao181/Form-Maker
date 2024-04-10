@@ -4,6 +4,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     min-height: 80vh;
+    width: 70vw;
     padding: 3vh;
     background-image: url("https://www.shutterstock.com/image-photo/blurred-office-background-260nw-1060494611.jpg");
     background-size: cover;
@@ -15,8 +16,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
-    padding: 10vw;
-    width: 90vw;
+    padding: 3vw;
+    width: 60vw;
 }
 
 .forms-table-view-button{

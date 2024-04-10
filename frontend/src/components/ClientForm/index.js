@@ -8,7 +8,6 @@ const ClintForm = (props) => {
     const [formData, setFormData] = useState([])
     const [data, setData] = useState([])
 
-    const clientEmail = localStorage.getItem("clientEmail")
 
     let tableName = "client"
 
@@ -31,10 +30,12 @@ const ClintForm = (props) => {
             window.location.reload()
         })
         .catch(err => console.log(err))
-        
     }
     return (
-        <div className="form-table-form-container"> 
+        <div className="form-table-client-form-container"> 
+        <div>
+            <img src="https://analytics.plunes.com/signup.png" alt="signup"/>
+        </div>
             <form onSubmit={onSubmitForm} className="forms-table-form">
                 <h1>Client Form</h1>
                 {formData.map((eachData) => {

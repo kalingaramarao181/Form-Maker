@@ -18,9 +18,80 @@
     text-align: center;
     text-decoration: none;
     font-family: "cursive";
+    cursor: pointer;
   }
   .app-logo{
     height: 6vh;
     width: 9vw;
     border-radius: 5px;
+  }
+  .home-login-button{
+    color: white;
+    text-decoration: none;
+    font-size: 1.6vw;
+    font-family: roboto;
+    background-color: transparent;
+    border : none;
+    cursor: pointer;
+  }
+  .sidebar {
+    width: 30vw;
+    height: 50%;
+    background-color: #36366f;
+    position: fixed;
+    top: 10;
+    right: -30vw; /* Initially hide the sidebar on the right side */
+    transition: right 0.5s ease;
+    border-radius: 10px; /* Apply transition effect to right property */
+  }
+  
+  .sidebar.open {
+    right: 0; /* Move sidebar to the right when open */
+  }
+  
+  .navButton {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Adjust button position */
+  }
+  .home-sidebar-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+    border-radius: 10px;
+  }
+  .home-sidebar-top-container{
+    align-self: flex-end;
+  }
+  .home-sidebar-bottom-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 30vh;
+  }
+  .home-sidebar-descreption{
+    text-align: center;
+    font-size: 1.5vw;
+    color: white;
+  }
+  .home-sidebar-signup-button{
+    border: none;
+    height: 5vh;
+    border-radius: 5px;
+    width: 10vw;
+    color: white;
+    background-color: #9B5706;
+  }
+  .home-sidebar-span{
+    color: white;
+  }
+  .home-sidebar-login-button{
+    background-color: transparent;
+    padding: 0.5vw;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin-left: 0.8vw;
   }

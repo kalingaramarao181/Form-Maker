@@ -13,6 +13,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ClientForm from "./components/ClientForm"
 import CandidateForms from './components/CandidateForms';
 import Purchage from './components/Purchage';
+import Admin from './components/Admin';
+import AboutUs from './components/About';
+import FormsDemo from './components/FormsDemo';
+import Secure from './components/Secure';
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +33,11 @@ function App() {
         <Route path="/client-form" exact component={ClientForm} />
         <Route path="/candidate-forms" exact component={CandidateForms} />
         <Route path="/candidate-purchage" exact component={Purchage} />
+        <Secure path="/admin" exact component={Admin} />
+        <Route path="/about" exact component={AboutUs} />
+        <Route path="/forms-demo" exact component={FormsDemo} />
+
+
 
       </Switch>
     </BrowserRouter>

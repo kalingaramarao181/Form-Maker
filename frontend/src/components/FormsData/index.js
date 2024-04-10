@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import "./index.css"
 import { FaWpforms } from "react-icons/fa";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 const FormsData = (props) => {
     const { history } = props
     const [tables, setTables] = useState([])
     const [filteredData, setFilteredData] = useState([])
-    const [searchValue, setSearchValue] = useState("")
+    const [ setSearchValue] = useState("")
 
     useEffect(() => {
         axios.get("http://localhost:4000/tables")
@@ -53,4 +54,4 @@ const FormsData = (props) => {
     )
 }
 
-export default FormsData
+export default withRouter(FormsData)
