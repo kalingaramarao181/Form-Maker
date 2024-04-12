@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import "./index.css"
 
 const CreateTableForm = () => {
@@ -45,6 +46,7 @@ const CreateTableForm = () => {
       <div className='table-create-farm-container'>
         <h1>Form created successfully!</h1>
         <h1>Thank You</h1>
+        <Link to="/create-form"><button className='create-form-ok-button' onClick={() => window.location.reload()}>Ok</button></Link>
       </div>
     );
   }

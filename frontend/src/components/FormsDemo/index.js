@@ -13,7 +13,7 @@ const FormsDemo = () => {
       <div className='form-feature-icon-container'>
         <div className='form-features'>
           <p>Features</p>
-          <p>Templates</p>
+          <Link to="candidate-forms"><p>Templates</p></Link>
           <p>Customers</p>
           <p>Pricing</p>
           <p>Integrations</p>

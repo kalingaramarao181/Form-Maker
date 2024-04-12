@@ -113,7 +113,6 @@ app.get("/columns/:tableName", (req, res) => {
 
   pool.query(sql, [tableName], (err, data) => {
     if (err) {
-      console.error('Error fetching columns:', err);
       return res.status(500).json({ error: 'Error fetching columns' });
     }
     // Extract column names and types from the results

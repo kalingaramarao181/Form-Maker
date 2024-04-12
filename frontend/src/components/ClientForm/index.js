@@ -48,7 +48,7 @@ const ClintForm = (props) => {
                         <div className="forms-table-form-container">
                             <label className="forms-table-input-label">{eachData.name}:</label>
                             {eachData.type === "text" ? <textarea value={data[eachData.name]} onChange={inputHandler} cols={30} rows={6} className="forms-table-name-input" type={eachData.type} name={eachData.name} placeholder={`Enter ${eachData.name}`}/> :
-                            <input value={data[eachData.name]} name={eachData.name} onChange={inputHandler} className="forms-table-name-input" type={eachData.type} placeholder={`Enter ${eachData.name}`}/>}
+                            <input value={data[eachData.name]} name={eachData.name} onChange={inputHandler} className="forms-table-name-input" type={eachData.type} placeholder={`Enter ${eachData.name}`} required/>}
                         </div>
                     )
                 })}

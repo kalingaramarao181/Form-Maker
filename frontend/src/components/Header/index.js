@@ -25,6 +25,8 @@ const Header = (props) => {
                 <Link to="forms-demo" className='nav-Home'>Forms</Link>
                 <Link to="create-form" className='nav-Home'>Create Form</Link>
                 <Link to="about" className='nav-Home'>About Us</Link>
+                <Link to="prising" className='nav-Home'>About Us</Link>
+
                 <button  onClick={toggleSidebar} to="login" className='home-login-button'>Admin</button>
             </div>
             <>

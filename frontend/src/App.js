@@ -17,6 +17,8 @@ import Admin from './components/Admin';
 import AboutUs from './components/About';
 import FormsDemo from './components/FormsDemo';
 import Secure from './components/Secure';
+import PDF from './components/DownloadPdf';
+import Prising from './components/Prising';
 function App() {
   return (
     <BrowserRouter>
@@ -36,8 +38,8 @@ function App() {
         <Secure path="/admin" exact component={Admin} />
         <Route path="/about" exact component={AboutUs} />
         <Route path="/forms-demo" exact component={FormsDemo} />
-
-
+        <Route path="/pdf" exact component={PDF} />
+        <Route path="/prising" exact component={Prising} />
 
       </Switch>
     </BrowserRouter>

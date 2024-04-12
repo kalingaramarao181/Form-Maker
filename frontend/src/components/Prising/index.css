@@ -1,0 +1,41 @@
+.App {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .pricing-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .plan {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .plan:hover {
+    border-color: #007bff;
+  }
+  
+  .selected {
+    border-color: #007bff;
+  }
+  
+  .price {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .features {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .selected-plan-details {
+    margin-top: 50px;
+  }
+  
