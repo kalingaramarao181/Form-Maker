@@ -26,7 +26,7 @@ const FormsDemo = () => {
           <p className='form-main-para'>Create forms, collect form submissions, and automate workflows with powerful integrations. Experience the best free form builder. Totally free & no coding is required.we meticulously craft diverse form designs and elements tailored for various sectors, including education, employee management, sports, and more. Each category receives specialized attention, ensuring intuitive and efficient user experiences across the board."
 
           </p>
-          <Link to="client-form">
+          <Link to="candidate-purchage">
             <button className='form-button' >+ Create a free Form</button>
           </Link>
         </div>

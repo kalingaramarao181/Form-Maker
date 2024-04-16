@@ -95,3 +95,6 @@
     border: 1px solid white;
     margin-left: 0.8vw;
   }
+  button{
+    cursor: pointer;
+  }

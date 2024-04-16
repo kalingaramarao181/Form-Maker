@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./index.css";
 import axios from "axios";
 import Cookies from 'js-cookie'
+import Admin from "../Admin"
 
 
 const LoginForm = (props) => {
+    const adminToken = Cookies.get("adminToken")
     const { history } = props;
     const [errorMessage, setErrorMessage] = useState()
     const [data, setData] = useState({
@@ -48,7 +50,9 @@ const LoginForm = (props) => {
         })
     };
     return (
+        
         <>
+        {adminToken === undefined ?
             <div className="admin-main-container">
                 <h1 className="main-heading">ADMIN PANNEL</h1>
                 <form className="admin-container" onSubmit={submithandler}>
@@ -76,7 +80,7 @@ const LoginForm = (props) => {
                     <input type="submit" className="admin-submit" />
                     {errorMessage && <p className="login-error-message">{errorMessage}</p>}
                 </form>
-            </div>
+            </div> : <Admin />}
         </>
     );
 };

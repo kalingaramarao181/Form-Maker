@@ -18,7 +18,7 @@ import AboutUs from './components/About';
 import FormsDemo from './components/FormsDemo';
 import Secure from './components/Secure';
 import PDF from './components/DownloadPdf';
-import Prising from './components/Prising';
+import Pricing from './components/Pricing';
 function App() {
   return (
     <BrowserRouter>
@@ -39,8 +39,7 @@ function App() {
         <Route path="/about" exact component={AboutUs} />
         <Route path="/forms-demo" exact component={FormsDemo} />
         <Route path="/pdf" exact component={PDF} />
-        <Route path="/prising" exact component={Prising} />
-
+        <Route path="/pricing" exact component={Pricing} />
       </Switch>
     </BrowserRouter>
   );
