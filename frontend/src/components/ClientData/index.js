@@ -4,6 +4,7 @@ import "./index.css";
 import axios from "axios";
 import { FaWpforms } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
+import baseUrl from "../config";
 
 const ClientData = (props) => {
   const { history } = props
@@ -18,19 +19,19 @@ const ClientData = (props) => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:4000/candidate-data/" + email)
+    axios.get(`${baseUrl}candidate-data/` + email)
       .then(res => setCandidateDbData(res.data.map(item => item.tableid)))
       .catch(err => console.log(err))
   })
 
   useEffect(() => {
-    axios.get("http://localhost:4000/tables")
+    axios.get(`${baseUrl}tables`)
       .then(res => setTables(res.data))
       .catch(err => console.log(err))
   }, [])
 
   useEffect(() => {
-    axios.get("http://localhost:4000/client-data")
+    axios.get(`${baseUrl}client-data`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -64,7 +65,7 @@ const ClientData = (props) => {
   //DELETE CLIENT
   const deleteHandler = (id) => {
     alert("successfully deleted")
-    axios.delete('http://localhost:4000/delete-client/' + id)
+    axios.delete(`${baseUrl}delete-client/` + id)
       .then(res => console.log(res.data))
   }
 

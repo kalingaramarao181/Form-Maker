@@ -3,6 +3,7 @@ import "./index.css";
 import axios from "axios";
 import Cookies from 'js-cookie'
 import Admin from "../Admin"
+import baseUrl from "../config";
 
 
 const LoginForm = (props) => {
@@ -19,7 +20,7 @@ const LoginForm = (props) => {
     };
     const submithandler = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:4000/admin-login", { ...data })
+        axios.post(`${baseUrl}admin-login`, { ...data })
             .then((res) => {
                 if (res.statusText === "OK"){
                 Cookies.set("adminToken", res.data.jwtToken, {expires: 1/24})

@@ -4,6 +4,7 @@ import "./index.css"
 import { FaWpforms } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import baseUrl from "../config";
 
 const CandidateForms = (props) => {
     const {history} = props
@@ -16,13 +17,13 @@ const CandidateForms = (props) => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:4000/candidate-data/"+email)
+        axios.get(`${baseUrl}candidate-data/`+email)
         .then(res => setCandidateDbData(res.data.map(item => item.tableid)))
         .catch(err => console.log(err))
     })
 
     useEffect(() => {
-        axios.get("http://localhost:4000/tables")
+        axios.get(`${baseUrl}tables`)
         .then(res => setTables(res.data))
         .catch(err => console.log(err))
     }, [])

@@ -3,6 +3,7 @@ import axios from "axios"
 import "./index.css"
 import { FaWpforms } from "react-icons/fa";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import baseUrl from "../config";
 
 const FormsData = (props) => {
     const { history } = props
@@ -11,7 +12,7 @@ const FormsData = (props) => {
     const [ setSearchValue] = useState("")
 
     useEffect(() => {
-        axios.get("http://localhost:4000/tables")
+        axios.get(`${baseUrl}tables`)
             .then(res => {
                 setTables(res.data)
                 filterData(res.data)

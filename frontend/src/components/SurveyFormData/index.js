@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from "react"
 import "./index.css"
 import axios from "axios"
+import baseUrl from "../config"
 
 
 const SurveyFormData = () => {
@@ -10,7 +11,7 @@ const SurveyFormData = () => {
     const tableName = localStorage.getItem("tableName")
 
     useEffect(() => {
-        axios.get("http://localhost:4000/survey-form-data/" + tableName)
+        axios.get(`${baseUrl}survey-form-data/` + tableName)
         .then(res => setData(res.data))
         .catch(err => console.log(err))
     })

@@ -11,6 +11,7 @@ import { SlSocialFacebook } from "react-icons/sl";
 import { SlSocialGoogle } from "react-icons/sl";
 import Cookies from 'js-cookie'
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min"
+import CreateQuestion from "../CreateQuestion"
 
 
 const Admin = (props) => {
@@ -27,7 +28,7 @@ const Admin = (props) => {
         } else if (sidebarButtonStatus === "FormsData") {
             return <FormsData />
         } else if (sidebarButtonStatus === "CreateForm") {
-            return <CreateTableForm />
+            return <CreateQuestion />
         } else if (sidebarButtonStatus === "ClintData") {
             return <ClientData />
         } else if (sidebarButtonStatus === "Admin") {

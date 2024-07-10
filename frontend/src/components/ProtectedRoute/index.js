@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Redirect, Route } from 'react-router-dom';
 import Cookies from "js-cookie"
+import baseUrl from '../config';
+
+
+
 function ProtectedRoute(props) {
   const [authenticated, setAuthenticated] = useState(true);
   const token = Cookies.get("jwtToken")
@@ -12,7 +16,7 @@ function ProtectedRoute(props) {
       console.log('Token is missing')
       return;
     }
-    axios.get('http://localhost:4000/protected-route', {
+    axios.get(`${baseUrl}protected-route`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

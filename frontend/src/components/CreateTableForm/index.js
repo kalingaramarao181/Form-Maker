@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import "./index.css"
+import baseUrl from '../config';
 
 const CreateTableForm = () => {
   const [tbName, setTableName] = useState('');
@@ -31,7 +32,7 @@ const CreateTableForm = () => {
     const localCandidateData = JSON.parse(localStorage.getItem("candidateData"))
     const {name, email} = localCandidateData
     try {
-      await axios.post('http://localhost:4000/create-table', { tableName, columns, name, email });
+      await axios.post(`${baseUrl}create-table`, { tableName, columns, name, email });
       alert('Table created successfully');
       setSubmitted(true); // Set submitted to true after successful submission
     } catch (error) {

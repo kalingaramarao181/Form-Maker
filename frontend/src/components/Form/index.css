@@ -12,14 +12,18 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: center;
+    padding: 2vw;
+}
+.form-title{
     align-self: center;
 }
 .forms-table-input-label{
     align-self: flex-start;
-    font-size: 1vw;
-    font-weight: 800;
+    font-size: 1.5vw;
+    font-weight: 600;
 }
 .forms-table-name-input{
     margin-bottom: 1vw;
@@ -36,4 +40,48 @@
     background-color: #cd6cf7;
     color: white;
     align-self: flex-end;
+}
+.fill-in-the-bank-input{
+    width: 15vw;
+    height: 3vh;
+    border: none;
+    padding: 0px;
+    border-bottom: 1px dotted black;
+    padding-left: 1vw;
+}
+.fill-in-the-bank-input:focus{
+    outline: none;
+    border-bottom: 1px dotted black;
+}
+
+.coding-bank-input{
+    border: none;
+    padding: 0px;
+    padding-left: 1vw;
+    margin-bottom: 2vh;
+}
+.coding-bank-input:focus{
+    outline: none;
+}
+.print-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.print-button:hover {
+    background-color: #45a049;
+}
+.options-container{
+    padding-left: 2vw;
+    
+}
+.form-border-container{
+    padding: 2vw;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './index.css';
 import axios from 'axios';
+import baseUrl from '../config';
 
 function SwapCards() {
     const [showBox1, setShowBox1] = useState("");
@@ -27,7 +28,7 @@ function SwapCards() {
     event.preventDefault();
     const tableName = tbName.split(" ").join("")
     try {
-      await axios.post('http://localhost:4000/create-table', { tableName, columns });
+      await axios.post(`${baseUrl}create-table`, { tableName, columns });
       alert('Table created successfully');
       window.location.reload()
     } catch (error) {

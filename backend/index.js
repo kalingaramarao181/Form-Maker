@@ -5,10 +5,30 @@ const cors = require("cors")
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const jwt = require("jsonwebtoken")
 const crypto = require('crypto');
+const { v4: uuidv4 } = require('uuid');
+const multer = require('multer');
+const path = require('path');
+const pool = require('./db'); // Make sure this path is correct based on your project structure
+const { generateFormId } = require('./utils');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors())
+
+function generateFormId() {
+  return uuidv4(); // Generate a UUID
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage });
 
 
 function generateUniqueThreeDigitNumber() {
@@ -78,52 +98,34 @@ app.get('/protected-route', validateToken, (req, res) => {
   return res.json({ message: 'Protected route accessed' });
 });
 
-//GET TABLES FROM DATABASE
-app.get("/tables", (req, res) => {
-  const sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = ?";
-  const databaseName = pool.config.connectionConfig.database;
 
-  pool.query(sql, [databaseName], (err, data) => {
-    if (err) {
-      console.error('Error fetching tables:', err);
-      return res.status(500).json({ error: 'Error fetching tables' });
-    }
-
-    // Extract table names from the results
-    const tables = data.map(row => row.table_name);
-
-    return res.json(tables);
-  });
-});
-
-//GET SURVEY DATA TO SELECTED FORM
-app.get("/survey-form-data/:tableName", (req, res) => {
-  const tableName = req.params.tableName
-  const sql = `SELECT * FROM ${tableName}`
+//GET ALL FORMS
+app.get("/all-forms", (req, res) => {
+  const email = req.params.email;
+  const sql = 'SELECT formid, formname FROM  forms';
   pool.query(sql, (err, data) => {
-    if (err) return res.json(err)
-    return res.json(data)
-  })
-})
-
-//GET COLUMNS FROM TABLE
-app.get("/columns/:tableName", (req, res) => {
-  const tableName = req.params.tableName;
-  const sql = "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = ?";
-
-  pool.query(sql, [tableName], (err, data) => {
     if (err) {
-      return res.status(500).json({ error: 'Error fetching columns' });
+      console.error('Error executing query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
     }
-    // Extract column names and types from the results
-    const columns = data.map(row => ({
-      name: row.column_name,
-      type: row.data_type
-    }));
-    // Send columns as JSON in the response
-    return res.json(columns);
+    return res.json(data);
   });
 });
+
+//GET FORM
+app.get("/form/:formid", (req, res) => {
+  const formid = req.params.formid;
+  const sql = 'SELECT * FROM forms WHERE formid = ?';
+  pool.query(sql, [formid], (err, data) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(data);
+  });
+});
+
+
 
 //GET CANDIDATE DATA USING EMAIL
 app.get("/candidate-data/:email", (req, res) => {
@@ -155,54 +157,31 @@ app.get("/client-data", (req, res) => {
 //POST API'S
 
 
-//CREATE SURVEY API
-app.post('/create-table', async (req, res) => {
-  const { tableName, columns, name, email } = req.body;
-  const uniqueNumber = generateUniqueThreeDigitNumber();
-  const tableId = name.slice(0,4) + uniqueNumber;
+//CREATE FORM API NEW
+app.post('/create-form', upload.single('logo'), async (req, res) => {
+  const { tableName, columns } = req.body;
+  const formId = generateFormId();
+  const userEmail = "beedata@gmail.com"; 
+  const logo = req.file ? req.file.filename : null;
 
-  // Validate input
-  if (!tableName || !columns || !Array.isArray(columns)) {
-    return res.status(400).json({ error: 'Invalid input' });
+  const formData = {
+    formid: formId,
+    useremail: userEmail,
+    formname: tableName,
+    questions: JSON.stringify(columns),
+    logo: logo
+  };
+
+  const query = 'INSERT INTO forms SET ?';
+
+  try {
+    await pool.query(query, formData);
+    res.status(201).json({ message: 'Form created successfully', formId });
+    console.log('Form created successfully');
+  } catch (error) {
+    console.error('Error creating form:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-
-  // Create the CREATE TABLE query
-  let createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName + tableId} (`;
-  createTableQuery += `id INT AUTO_INCREMENT PRIMARY KEY, `; // Add id column
-
-  columns.forEach((column, index) => {
-    if (!column.name || !column.type) {
-      return res.status(400).json({ error: 'Invalid column' });
-    }
-    createTableQuery += `${column.name} ${column.type}`;
-    if (index < columns.length - 1) {
-      createTableQuery += ', ';
-    }
-  });
-
-  createTableQuery += ')';
-
-  // Execute the CREATE TABLE query
-  pool.query(createTableQuery, (err, result) => {
-    if (err) {
-      console.error('Error creating table:', err);
-      return res.status(500).json({ error: 'Error creating table' });
-    }
-    console.log(`${tableName} table created or already exists`);
-
-    // After successfully creating the table, insert data into 'forminfrormativedata' table
-    const insertDataQuery = 'INSERT INTO forminfrormativedata (`name`, `email`, `tableid`) VALUES (?, ?, ?)';
-    const values = [name, email, tableId];
-
-    pool.query(insertDataQuery, values, (err, data) => {
-      if (err) {
-        console.error('Error inserting data:', err);
-        return res.status(500).json({ error: 'Error inserting data' });
-      }
-      console.log('Data inserted successfully:', data);
-      res.status(200).json({ message: `${tableName} table created, data inserted` });
-    });
-  });
 });
 
 //POST SURVEY DATA FROM SELECTOD FORM

@@ -19,15 +19,16 @@ import FormsDemo from './components/FormsDemo';
 import Secure from './components/Secure';
 import PDF from './components/DownloadPdf';
 import Pricing from './components/Pricing';
+import CreateQuestion from './components/CreateQuestion';
 function App() {
   return (
     <BrowserRouter>
     <Header />
       <Switch>
         <Route path='/' exact component={Home} />
-        <ProtectedRoute path='/create-form' exact component={CreateTableForm} />
+        <Route path='/create-form' exact component={CreateQuestion} />
         <Route path='/Forms' exact component={Forms} />
-        <Route path="/survey-form" exact component={Form} />
+        <Route path="/form/:formid" exact component={Form} />
         <ProtectedRoute path="/forms-data" exact component={FormsData} />
         <Route path="/survey-form-data" exact component={SurveyFormData} />
         <Route path="/swap-cards" exact component={SwapCards} />

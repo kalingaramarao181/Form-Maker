@@ -4,49 +4,45 @@ import "./index.css"
 import { FaWpforms } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import baseUrl from "../config";
 
 const Forms = (props) => {
     const {history} = props
-    const [tables, setTables] = useState([])
+    const [forms, setForms] = useState([])
     const [searchValue, setSearchValue] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:4000/tables")
-        .then(res => setTables(res.data))
+        axios.get(`${baseUrl}all-forms`)
+        .then(res => {
+            setForms(res.data)
+            console.log(res.data);
+    })
         .catch(err => console.log(err))
     }, [])
 
 
 
-    const newData = []
-    for (let table of tables){
-        if (table.includes(searchValue)){
-            newData.push(table)
-        }
-    }
+    const searchedData = forms.filter((form) => form.formname.includes(searchValue))
 
 
-    const onClickFormTab = (tbName) => {
-        localStorage.setItem("tableName", tbName)
-        history.push("/survey-form")
+    const onClickFormTab = (formId) => {
+        localStorage.setItem("formId", formId)
+        history.push("/form/" + formId)
     }
 
     return (
         <div className="forms-table-view-main-container">
         <h1 className="forms-table-heading">Forms:</h1>
         <input onChange={(e) => setSearchValue(e.target.value)} type="search" placeholder="Search your Form" className="forms-search-input"/>
-        <div className="forms-table-view-container" style={newData.length === 0 ? {flexDirection:"column"}:{flexDirection:"row"}}>
-            {newData.length === 0 ? <p className="forms-table-search-data-err">No Data Found</p>:<>
-            {newData.map((eachTable) => {
-                if (eachTable.slice(eachTable.length - 4) === "form"){
+        <div className="forms-table-view-container" style={searchedData.length === 0 ? {flexDirection:"column"}:{flexDirection:"row"}}>
+            {searchedData.length === 0 ? <p className="forms-table-search-data-err">No Data Found</p>:<>
+            {searchedData.map((eachForm) => {
                 return (
-                    <button onClick={() => onClickFormTab(eachTable)} type="button" className="forms-table-view-button">
+                    <button onClick={() => onClickFormTab(eachForm.formid)} type="button" className="forms-table-view-button">
                         <FaWpforms className="forms-table-view-button-icon"/>
-                        {eachTable.slice(0,eachTable.length - 4).charAt(0).toUpperCase()+ eachTable.slice(0, eachTable.length - 4).substr(1).toLowerCase()}
+                        {eachForm.formname}
                     </button>
                 )
-                }
-                return <></>
             })}</>
         }
             <Link to="create-form">

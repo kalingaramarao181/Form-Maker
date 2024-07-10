@@ -1,0 +1,212 @@
+.table-create-farm-container {
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://www.bedrockhr.co.uk/wp-content/uploads/2019/07/services1.jpeg");
+    background-size: cover;
+}
+
+.table-create-farm {
+    width: 45vw;
+    padding: 1.5vw;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+}
+
+.table-create-input-label {
+    align-self: flex-start;
+    font-size: 1vw;
+    font-weight: 800;
+}
+
+.table-create-farm-heading {
+    font-size: 2vw;
+    font-family: "Roboto";
+    font-weight: 600;
+}
+
+.table-create-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vh;
+}
+
+.table-create-table-name-input {
+    margin-bottom: 1vw;
+    margin-top: 0.5vw;
+    padding: 0.5vw;
+    border-radius: 5px;
+    width: 24vw;
+}
+
+.table-create-add-column-input {
+    margin-right: 0.3vw;
+    padding: 0.5vw;
+    border-radius: 5px;
+    margin-bottom: 1vw;
+    width: 11vw;
+}
+
+.table-create-add-column-button {
+    padding: 0.8vw;
+    font-size: 0.8vw;
+    border-radius: 5px;
+    border: none;
+    margin-right: 0.5vw;
+    background-color: #976822;
+    color: white;
+}
+
+.table-create-create-table-button {
+    padding: 0.8vw;
+    font-size: 0.8vw;
+    border-radius: 5px;
+    border: none;
+    background-color: #518341;
+    color: white;
+}
+
+.create-form-ok-button {
+    padding: 1vw;
+    font-size: 1vw;
+    border-radius: 5px;
+    border: none;
+    background-color: #518341;
+    color: white;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #333;
+    height: 3vh;
+    margin-right: 5px;
+}
+
+.file-input-label:hover {
+    background-color: #e2e6ea;
+}
+
+.form-name-input{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    width: 25vw;
+    height: 3vh;
+    margin-right: 5px;
+}
+.form-name-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.add-options-button{
+    padding: 1.2vw;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #333;
+    height: 3vh;
+    margin-right: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.enter-options-input{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    width: 3vw;
+    height: 3vh;
+    margin-right: 5px;
+}
+.select-options-input{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    width: 15vw;
+    height: 4.5vh;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.question-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+.form-question-input{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    width: 31.4vw;
+    height: 3vh;
+    margin-bottom: 15px;
+}
+.options-container{
+    display: flex;
+    flex-direction: column;
+}
+.option-input{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    width: 15vw;
+    height: 3vh;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.add-option-button{
+    width: 5vw;
+    height: 3vh;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 1vw;
+}
+.remove-question-button{
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #333;
+    height: 3vh;
+    margin-right: 5px;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    padding: 1vw;
+    color: red;
+}
+.form-answer-input {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    width: 10vw;
+    height: 3vh;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    align-self: flex-end;
+  }
