@@ -64,7 +64,7 @@ const Admin = (props) => {
                     </button>
                     <div>
                         <button style={{backgroundColor:sidebarButtonStatus==="Forms" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("Forms")} className="admin-sidebar-button">Forms</button>
-                        <button style={{backgroundColor:sidebarButtonStatus==="FormsData" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("FormsData")} className="admin-sidebar-button">Forms Data</button>
+                        <button style={{backgroundColor:sidebarButtonStatus==="FormsData" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("FormsData")} className="admin-sidebar-button">Responses</button>
                         <button style={{backgroundColor:sidebarButtonStatus==="CreateForm" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("CreateForm")} className="admin-sidebar-button">Create Form</button>
                         <button style={{backgroundColor:sidebarButtonStatus==="ClintData" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("ClintData")} className="admin-sidebar-button">Candidates</button>
                     </div>

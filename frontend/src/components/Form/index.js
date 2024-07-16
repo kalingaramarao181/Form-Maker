@@ -8,7 +8,10 @@ import ReactToPrint from "react-to-print";
 const Form = () => {
     const [form, setForm] = useState({});
     const [questions, setQuestions] = useState([]);
-    const [data, setData] = useState({});
+    const [answers, setAnswers] = useState({});
+    const [userData, setUserData] = useState({})
+    const [nextButtonStatus, setNextButtonStatus] = useState(false)
+
     const choices = ['A', 'B', 'C', 'D', 'E', 'F'];
     const formRef = useRef(); // Create a ref to the form component
 
@@ -30,7 +33,7 @@ const Form = () => {
     const inputHandler = (e) => {
         const { name, value, type, checked } = e.target;
         if (type === "checkbox") {
-            setData((prevState) => {
+            setAnswers((prevState) => {
                 const selectedOptions = prevState[name] || [];
                 if (checked) {
                     return { ...prevState, [name]: [...selectedOptions, value] };
@@ -39,23 +42,35 @@ const Form = () => {
                 }
             });
         } else {
-            setData({ ...data, [name]: value });
+            setAnswers({ ...answers, [name]: value });
         }
     };
 
+    const userInputHandler = (e) => {
+        setUserData({...userData, [e.target.name]:e.target.value})
+    }
+
     const onSubmitForm = (e) => {
         e.preventDefault();
-        axios.post(`${baseUrl}post-to/` + formid, { ...data })
+
+        axios.post(`${baseUrl}response`, { answers, userData, formid })   
             .then(res => {
-                console.log(res.data);
-                setData({});
+                alert('Form created successfully');
+                setAnswers({});
             })
-            .catch(err => console.log(err));
-        window.location.reload();
+            .catch(err => alert('Error creating form'));
+            window.location.reload();
     };
 
-    return (
-        <div className="form-table-form-container">
+    const onSubmitUserDetails = (e) => {
+        e.preventDefault();
+        setNextButtonStatus(true)
+
+    }
+
+    const formDetails = () => {
+        return (
+            <div className="form-table-form-container">
             <form ref={formRef} onSubmit={onSubmitForm} className="forms-table-form">
                 <div className="form-border-container">
                     <h1 className="form-title">{form.formname}</h1>
@@ -73,7 +88,7 @@ const Form = () => {
                                                     name={`question_${index}`} // Use a unique identifier for the question
                                                     value={option}
                                                     onChange={inputHandler}
-                                                    checked={data[`question_${index}`] === option}
+                                                    checked={answers[`question_${index}`] === option}
                                                 />
                                                 <label>{option}</label>
                                             </div>
@@ -94,7 +109,7 @@ const Form = () => {
                                                     name={`question_${index}`} // Use a unique identifier for the question
                                                     value={option}
                                                     onChange={inputHandler}
-                                                    checked={data[`question_${index}`] && data[`question_${index}`].includes(option)}
+                                                    checked={answers[`question_${index}`] && answers[`question_${index}`].includes(option)}
                                                 />
                                                 <label>{option}</label>
                                             </div>
@@ -110,7 +125,7 @@ const Form = () => {
                                         <input
                                             type="text"
                                             name={`question_${index}`} // Use a unique identifier for the question
-                                            value={data[`question_${index}`] || ""}
+                                            value={answers[`question_${index}`] || ""}
                                             onChange={inputHandler}
                                             className="fill-in-the-bank-input"
                                         />
@@ -126,7 +141,7 @@ const Form = () => {
                                     <textarea
                                         type="text"
                                         name={`question_${index}`} // Use a unique identifier for the question
-                                        value={data[`question_${index}`] || ""}
+                                        value={answers[`question_${index}`] || ""}
                                         onChange={inputHandler}
                                         cols={100}
                                         rows={20}
@@ -144,6 +159,25 @@ const Form = () => {
                 trigger={() => <button className="print-button">Print PDF</button>}
                 content={() => formRef.current}
             />
+        </div>
+        )
+    }
+
+    const userDetailsForm = () => {
+        return (
+        <form onSubmit={onSubmitUserDetails} className="user-form-container">
+            <h1>Enter Details</h1>
+            <input onChange={userInputHandler} className="user-input" name="name" type="text" placeholder="Enter Your Name" required/>
+            <input onChange={userInputHandler} className="user-input" name="email" type="text" placeholder="Enter Your Email" required/>
+            <input onChange={userInputHandler} className="user-input" name="phoneNo" type="text" placeholder="Enter Your Phone Number" required/>
+            <button type="submit" className="forms-table-submit-button">Next</button>
+        </form>
+        )
+    }
+
+    return (
+        <div className="form-table-form-container">
+            {nextButtonStatus ? formDetails() : userDetailsForm()}
         </div>
     );
 };

@@ -59,6 +59,15 @@ const CreateQuestion = () => {
     setColumns(updatedColumns);
   };
 
+  const mapAnswerToOption = (column) => {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const answers = column.answer.split(',').map(answer => answer.trim().toUpperCase());
+    return answers.map(answer => {
+      const index = alphabet.indexOf(answer);
+      return column.options[index] || '';
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const tableName = tbName.split(" ").join("");
@@ -66,17 +75,24 @@ const CreateQuestion = () => {
       const localCandidateData = JSON.parse(localStorage.getItem("candidateData"));
       const { name, email } = localCandidateData;
 
+      const formattedColumns = columns.map(column => ({
+        ...column,
+        answer: (column.type === 'MCQ' || column.type === 'CheckBox') ? mapAnswerToOption(column) : column.answer
+      }));
+
+      
+
       const formData = new FormData();
       formData.append('tableName', tableName);
-      formData.append('columns', JSON.stringify(columns));
+      formData.append('columns', JSON.stringify(formattedColumns));
       formData.append('name', name);
       formData.append('email', email);
       if (selectedFile) {
         formData.append('logo', selectedFile);
       }
 
-      console.log(...formData);
-
+      console.log('FormData to be sent:', ...formData.entries());
+      console.log(formData);
       try {
         await axios.post(`${baseUrl}create-form`, formData, {
           headers: {

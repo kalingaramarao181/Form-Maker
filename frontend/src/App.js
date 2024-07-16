@@ -20,6 +20,7 @@ import Secure from './components/Secure';
 import PDF from './components/DownloadPdf';
 import Pricing from './components/Pricing';
 import CreateQuestion from './components/CreateQuestion';
+import Response from './components/Response';
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/create-form' exact component={CreateQuestion} />
+        <Route path='/response/:formid/:responseid' exact component={Response} />
         <Route path='/Forms' exact component={Forms} />
         <Route path="/form/:formid" exact component={Form} />
         <ProtectedRoute path="/forms-data" exact component={FormsData} />
