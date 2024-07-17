@@ -50,7 +50,7 @@ const Header = (props) => {
                         </div>
                         <div className="home-sidebar-bottom-container" >
                             <p className="home-sidebar-descreption">Get better data with conversational forms, surveys, quizzes & more.</p>
-                            <Link to="client-form">
+                            <Link to="/client-form">
                                 <button className="home-sidebar-signup-button">Signup</button>
                             </Link>
                         </div>

@@ -81,7 +81,6 @@ const CreateQuestion = () => {
       }));
 
       
-
       const formData = new FormData();
       formData.append('tableName', tableName);
       formData.append('columns', JSON.stringify(formattedColumns));

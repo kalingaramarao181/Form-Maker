@@ -13,10 +13,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+//GENARATE FORM UNIQUEID
 function generateFormId() {
   return uuidv4(); // Generate a UUID
 }
 
+//GENARATE RESPONSE UNIQUEID
 function generateResponseId() {
   return uuidv4(); // Generate a UUID
 }
@@ -32,27 +34,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-function generateUniqueThreeDigitNumber() {
-  const randomNumber = crypto.randomInt(1000);
-  const uniqueNumber = randomNumber.toString().padStart(3, '0');
-  return uniqueNumber;
-}
-
 const tokens = {}; // Object to store token usage count
 
+
+//TOKEN GENERATION FOR USER ATHANTICATION
 function generateToken(payload) {
   const token = jwt.sign(payload, 'SECRET_KEY');
   tokens[token] = 0;
   return token;
 }
-
+// VALIDATION FOR USER ATHANTICATION
 function validateToken(req, res, next) {
   try {
     const token = req.headers.authorization.split(' ')[1];
     if (!token) {
       return res.status(401).json({ error: 'Token is missing' });
     }
-
     if (!tokens[token]) {
       tokens[token] = 0;
     }
@@ -68,6 +65,7 @@ function validateToken(req, res, next) {
   }
 }
 
+//DATABASE CONNECTION
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
@@ -76,8 +74,7 @@ const pool = mysql.createPool({
   database: 'formcreation'
 });
 
-// GET API'S
-
+//PROTECTION FOR USER
 app.get('/protected-route', validateToken, (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   if (!tokens[token]) {
@@ -86,6 +83,7 @@ app.get('/protected-route', validateToken, (req, res) => {
   return res.json({ message: 'Protected route accessed' });
 });
 
+//GET ALL FORMS (FORMS)
 app.get("/all-forms", (req, res) => {
   const email = req.params.email;
   const sql = 'SELECT formid, formname FROM forms';
@@ -98,9 +96,9 @@ app.get("/all-forms", (req, res) => {
   });
 });
 
+//GET ALL RESPONSES(FORMS, RESPONSES)
 app.get("/all-responses", (req, res) => {
-  const email = req.params.email;
-  const sql = 'SELECT formid, formname FROM forms';
+  const sql = 'SELECT f.formid, f.formname, COUNT(*) AS formcount FROM responses r JOIN forms f ON r.formid = f.formid GROUP BY r.formid'
   pool.query(sql, (err, data) => {
     if (err) {
       console.error('Error executing query:', err);
@@ -110,6 +108,20 @@ app.get("/all-responses", (req, res) => {
   });
 });
 
+//GET FORM RESPONSES WITH FORMID
+app.get("/form-responses/:formid", (req, res) => {
+  const formid = req.params.formid;
+  const sql = 'SELECT * FROM responses WHERE formid = ?'
+  pool.query(sql,[formid], (err, data) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(data);
+  }); 
+});
+
+//GET FORM WITH FORMID (FORMS)
 app.get("/form/:formid", (req, res) => {
   const formid = req.params.formid;
   const sql = 'SELECT * FROM forms WHERE formid = ?';
@@ -122,8 +134,7 @@ app.get("/form/:formid", (req, res) => {
   });
 });
 
-
-
+//GET RESPONSE WITH FORMID AND RESPONSEID (FORMS, RESPONSES)
 app.get("/response-form/:formid/:responseid", (req, res) => {
   const formid = req.params.formid;
   const responseid = req.params.responseid;
@@ -137,6 +148,7 @@ app.get("/response-form/:formid/:responseid", (req, res) => {
   });
 });
 
+//GET RESPONSES WITH FORMID (RESPONSES)
 app.get("/response-data/:formid", (req, res) => {
   const formid = req.params.formid;
   const sql = 'SELECT * FROM responses WHERE formid = ?';
@@ -152,18 +164,8 @@ app.get("/response-data/:formid", (req, res) => {
   });
 });
 
-app.get("/candidate-data/:email", (req, res) => {
-  const email = req.params.email;
-  const sql = 'SELECT tableid FROM forminfrormativedata WHERE email = ?';
-  pool.query(sql, [email], (err, data) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      return res.status(500).json({ error: 'Internal server error' });
-    }
-    return res.json(data);
-  });
-});
 
+//GET USER DATA (CLIENT)
 app.get("/client-data", (req, res) => {
   const sql = "SELECT * FROM client";
   pool.query(sql, (err, data) => {
@@ -172,14 +174,12 @@ app.get("/client-data", (req, res) => {
   });
 });
 
-// POST API'S
-
+//CREATING FORM (FORMS)
 app.post('/create-form', upload.single('logo'), async (req, res) => {
   const { tableName, columns } = req.body;
   const formId = generateFormId();
   const userEmail = "beedata@gmail.com";
   const logo = req.file ? req.file.filename : null;
-
   const formData = {
     formid: formId,
     useremail: userEmail,
@@ -205,6 +205,7 @@ app.post('/create-form', upload.single('logo'), async (req, res) => {
   }
 });
 
+//POST USER RESPONSE (RESPONSES)
 app.post("/response", (req, res) => {
   const { answers, userData, formid } = req.body;
   const responseid = generateResponseId();
@@ -214,11 +215,8 @@ app.post("/response", (req, res) => {
     useremail: userData.email,
     answers: JSON.stringify(answers),
     userdata: JSON.stringify(userData),
-    
   };
-
   const query = 'INSERT INTO responses SET ?';
-
   try {
     pool.query(query, responseData, (error, results) => {
       if (error) {
@@ -234,20 +232,38 @@ app.post("/response", (req, res) => {
   }
 });
 
-app.post("/signup/:tableName", (req, res) => {
-  const tableName = req.params.tableName;
-  const { email } = req.body;
-  const { ...data } = req.body;
-  const keys = Object.keys(data);
-  const values = Object.values(data);
-  const sql = `INSERT INTO ${tableName} (${keys.map((each) => "`" + each + "`")}) VALUES (?)`;
-  const token = generateToken({ userId: email });
-  pool.query(sql, [values], (err, data) => {
-    if (err) return res.json(err);
-    return res.json({ token });
+//USER SIGNUP (CLIENT)
+app.post("/signup-user", (req, res) => {
+  const { name, email, phoneno, location, address } = req.body;
+  const dbsql = 'SELECT * FROM client WHERE email = ?';
+  const postsql = 'INSERT INTO client (`name`, `email`, `phoneno`, `location`, `address`) VALUES (?)';
+  const values = [name, email, phoneno, location, address];
+
+  pool.query(dbsql, [email], (err, data) => {
+    if (err) {
+      console.error('Database query error:', err);
+      res.status(500).json({ error: 'Database query error' });
+      return;
+    }
+
+    if (data.length > 0) {
+      console.error('User already exists');
+      res.status(409).json({ error: 'User Already Exists' });
+      return;
+    }
+    pool.query(postsql, [values], (err, result) => {
+      if (err) {
+        console.error('Database insertion error:', err);
+        res.status(500).json({ error: 'Database insertion error' });
+        return;
+      }
+      console.log('Data inserted successfully');
+      res.status(201).json({ message: 'Application submitted successfully' });
+    });
   });
 });
 
+//ADMIN LOGIN (ADMINFORM)
 app.post("/admin-login", (req, res) => {
   const { username, password } = req.body;
   const sql = `SELECT * FROM adminform WHERE email = '${username}'`;
@@ -268,6 +284,7 @@ app.post("/admin-login", (req, res) => {
   });
 });
 
+//DELETE CLIENT (CLIENT)
 app.delete("/delete-client/:id", (req, res) => {
   const sql = "DELETE FROM client WHERE id = (?)";
   const id = [req.params.id];
@@ -277,16 +294,6 @@ app.delete("/delete-client/:id", (req, res) => {
   });
 });
 
-app.get("/dummy", (req, res) => {
-  const sql = "SELECT * FROM dummy";
-  pool.query(sql, (err, data) => {
-    if (err) {
-      console.error('Error fetching data from dummy table:', err);
-      return res.status(500).json({ error: 'Error fetching data from dummy table' });
-    }
-    return res.json(data);
-  });
-});
 
 module.exports = function (app) {
   app.use('/api', createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true }));

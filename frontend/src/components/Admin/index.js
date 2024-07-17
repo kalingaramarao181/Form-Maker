@@ -1,8 +1,5 @@
-import { useState } from "react"
 import Forms from "../Forms"
 import "./index.css"
-import FormsData from "../FormsData"
-import CreateTableForm from "../CreateTableForm"
 import ClientData from "../ClientData"
 import { TiSocialLinkedin } from "react-icons/ti";
 import { TiSocialTwitter } from "react-icons/ti";
@@ -12,21 +9,30 @@ import { SlSocialGoogle } from "react-icons/sl";
 import Cookies from 'js-cookie'
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min"
 import CreateQuestion from "../CreateQuestion"
+import Responses from "../Responses"
+import FormResponses from "../FormResponses"
 
 
 const Admin = (props) => {
-    const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Admin")
+    const sidebarButtonStatus = localStorage.getItem("sidebarButtonStatus")
 
     const onClickLogout = () => {
         Cookies.remove("adminToken")
         props.history.replace("/")
     }
 
+    const setSidebarButtonStatus = (buttonStatus) => {
+        localStorage.setItem("sidebarButtonStatus", buttonStatus)
+        window.location.reload()
+    }
+
     const renderContent = () => {
         if (sidebarButtonStatus === "Forms") {
             return <Forms />
-        } else if (sidebarButtonStatus === "FormsData") {
-            return <FormsData />
+        } else if (sidebarButtonStatus === "Responses") {
+            return <Responses />
+        }else if (sidebarButtonStatus === "FormResponses") {
+            return <FormResponses />
         } else if (sidebarButtonStatus === "CreateForm") {
             return <CreateQuestion />
         } else if (sidebarButtonStatus === "ClintData") {
@@ -60,11 +66,11 @@ const Admin = (props) => {
                 <div className="admin-sidebar">
                     <div className="admin-buttons-container">
                     <button className="admin-image-botton"  onClick={() => setSidebarButtonStatus("Admin")} >
-                        <img className="admin-image" src="https://www.payrollhub.in/static/images/admin.png" />
+                        <img className="admin-image" alt="admin" src="https://www.payrollhub.in/static/images/admin.png" />
                     </button>
                     <div>
                         <button style={{backgroundColor:sidebarButtonStatus==="Forms" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("Forms")} className="admin-sidebar-button">Forms</button>
-                        <button style={{backgroundColor:sidebarButtonStatus==="FormsData" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("FormsData")} className="admin-sidebar-button">Responses</button>
+                        <button style={{backgroundColor:sidebarButtonStatus==="Responses" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("Responses")} className="admin-sidebar-button">Responses</button>
                         <button style={{backgroundColor:sidebarButtonStatus==="CreateForm" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("CreateForm")} className="admin-sidebar-button">Create Form</button>
                         <button style={{backgroundColor:sidebarButtonStatus==="ClintData" ? "#0E0C49": "#030131" }} onClick={() => setSidebarButtonStatus("ClintData")} className="admin-sidebar-button">Candidates</button>
                     </div>
