@@ -18,12 +18,14 @@ const LoginForm = (props) => {
     const changehandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
+
     const submithandler = (e) => {
         e.preventDefault();
         axios.post(`${baseUrl}admin-login`, { ...data })
             .then((res) => {
                 if (res.statusText === "OK"){
                 Cookies.set("adminToken", res.data.jwtToken, {expires: 1/24})
+                localStorage.setItem("candidateData", JSON.stringify(res.data.userData))
                 history.replace("/admin")
                 }
             })

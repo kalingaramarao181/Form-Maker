@@ -11,6 +11,8 @@ const CreateQuestion = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
+  const candidateData = localStorage.getItem("candidateData") || null
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -72,9 +74,6 @@ const CreateQuestion = () => {
     event.preventDefault();
     const tableName = tbName.split(" ").join("");
     if (localStorage.getItem("candidateData")) {
-      const localCandidateData = JSON.parse(localStorage.getItem("candidateData"));
-      const { name, email } = localCandidateData;
-
       const formattedColumns = columns.map(column => ({
         ...column,
         answer: (column.type === 'MCQ' || column.type === 'CheckBox') ? mapAnswerToOption(column) : column.answer
@@ -84,8 +83,7 @@ const CreateQuestion = () => {
       const formData = new FormData();
       formData.append('tableName', tableName);
       formData.append('columns', JSON.stringify(formattedColumns));
-      formData.append('name', name);
-      formData.append('email', email);
+      formData.append('userdetails', candidateData);
       if (selectedFile) {
         formData.append('logo', selectedFile);
       }

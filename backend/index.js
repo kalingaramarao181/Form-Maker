@@ -176,13 +176,12 @@ app.get("/client-data", (req, res) => {
 
 //CREATING FORM (FORMS)
 app.post('/create-form', upload.single('logo'), async (req, res) => {
-  const { tableName, columns } = req.body;
+  const { tableName, columns, userdetails } = req.body;
   const formId = generateFormId();
-  const userEmail = "beedata@gmail.com";
-  const logo = req.file ? req.file.filename : null;
+  const logo = req.file ? req.file.filename : "";
   const formData = {
     formid: formId,
-    useremail: userEmail,
+    userdetails: userdetails,
     formname: tableName,
     questions: columns,
     logo: logo
@@ -276,7 +275,7 @@ app.post("/admin-login", (req, res) => {
     } else if (data[0].password === password) {
       const payload = { username: username };
       const jwtToken = jwt.sign(payload, "SECRET_TOKEN");
-      res.json({ jwtToken });
+      res.json({ jwtToken, userData: data });
       res.status(200);
     } else {
       res.status(400).json({ error: "Invalid Password" });
