@@ -16,6 +16,7 @@ const Form = () => {
     const formRef = useRef(); // Create a ref to the form component
 
     const { formid } = useParams(); // Get the formId from the URL
+    console.log(formid);
 
     useEffect(() => {
         axios.get(`${baseUrl}form/` + formid)
@@ -23,7 +24,7 @@ const Form = () => {
                 if (res.data.length !== 0) {
                     setForm(res.data[0]);
                     setQuestions(JSON.parse(res.data[0].questions));
-                    console.log(JSON.parse(res.data[0].questions));
+                    console.log(JSON.parse(res.data[0]));
                 }
                 console.log(res.data[0]);
             })
@@ -166,7 +167,7 @@ const Form = () => {
     const userDetailsForm = () => {
         return (
         <form onSubmit={onSubmitUserDetails} className="user-form-container">
-            <h1>Enter Details</h1>
+            <h1> Details</h1>
             <input onChange={userInputHandler} className="user-input" name="name" type="text" placeholder="Enter Your Name" required/>
             <input onChange={userInputHandler} className="user-input" name="email" type="text" placeholder="Enter Your Email" required/>
             <input onChange={userInputHandler} className="user-input" name="phoneNo" type="text" placeholder="Enter Your Phone Number" required/>

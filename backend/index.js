@@ -13,14 +13,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-//GENARATE FORM UNIQUEID
+// Generate Form Unique ID
 function generateFormId() {
-  return uuidv4(); // Generate a UUID
+  return uuidv4();
 }
 
-//GENARATE RESPONSE UNIQUEID
+// Generate Response Unique ID
 function generateResponseId() {
-  return uuidv4(); // Generate a UUID
+  return uuidv4();
 }
 
 const storage = multer.diskStorage({
@@ -36,14 +36,14 @@ const upload = multer({ storage });
 
 const tokens = {}; // Object to store token usage count
 
-
-//TOKEN GENERATION FOR USER ATHANTICATION
+// Token Generation for User Authentication
 function generateToken(payload) {
   const token = jwt.sign(payload, 'SECRET_KEY');
   tokens[token] = 0;
   return token;
 }
-// VALIDATION FOR USER ATHANTICATION
+
+// Validation for User Authentication
 function validateToken(req, res, next) {
   try {
     const token = req.headers.authorization.split(' ')[1];
@@ -53,11 +53,9 @@ function validateToken(req, res, next) {
     if (!tokens[token]) {
       tokens[token] = 0;
     }
-
     if (tokens[token] >= 6) {
       return res.status(401).json({ error: 'Token usage limit exceeded' });
     }
-
     tokens[token]++;
     next();
   } catch (error) {
@@ -65,7 +63,7 @@ function validateToken(req, res, next) {
   }
 }
 
-//DATABASE CONNECTION
+// Database Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
@@ -74,7 +72,7 @@ const pool = mysql.createPool({
   database: 'formcreation'
 });
 
-//PROTECTION FOR USER
+// Protection for User
 app.get('/protected-route', validateToken, (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   if (!tokens[token]) {
@@ -83,9 +81,8 @@ app.get('/protected-route', validateToken, (req, res) => {
   return res.json({ message: 'Protected route accessed' });
 });
 
-//GET ALL FORMS (FORMS)
+// Get All Forms (Forms)
 app.get("/all-forms", (req, res) => {
-  const email = req.params.email;
   const sql = 'SELECT formid, formname FROM forms';
   pool.query(sql, (err, data) => {
     if (err) {
@@ -96,9 +93,9 @@ app.get("/all-forms", (req, res) => {
   });
 });
 
-//GET ALL RESPONSES(FORMS, RESPONSES)
+// Get All Responses (Forms, Responses)
 app.get("/all-responses", (req, res) => {
-  const sql = 'SELECT f.formid, f.formname, COUNT(*) AS formcount FROM responses r JOIN forms f ON r.formid = f.formid GROUP BY r.formid'
+  const sql = 'SELECT f.formid, f.formname, COUNT(*) AS formcount FROM responses r JOIN forms f ON r.formid = f.formid GROUP BY r.formid';
   pool.query(sql, (err, data) => {
     if (err) {
       console.error('Error executing query:', err);
@@ -108,20 +105,20 @@ app.get("/all-responses", (req, res) => {
   });
 });
 
-//GET FORM RESPONSES WITH FORMID
+// Get Form Responses with FormID
 app.get("/form-responses/:formid", (req, res) => {
   const formid = req.params.formid;
-  const sql = 'SELECT * FROM responses WHERE formid = ?'
-  pool.query(sql,[formid], (err, data) => {
+  const sql = 'SELECT * FROM responses WHERE formid = ?';
+  pool.query(sql, [formid], (err, data) => {
     if (err) {
       console.error('Error executing query:', err);
       return res.status(500).json({ error: 'Internal server error' });
     }
     return res.json(data);
-  }); 
+  });
 });
 
-//GET FORM WITH FORMID (FORMS)
+// Get Form with FormID (Forms)
 app.get("/form/:formid", (req, res) => {
   const formid = req.params.formid;
   const sql = 'SELECT * FROM forms WHERE formid = ?';
@@ -134,7 +131,7 @@ app.get("/form/:formid", (req, res) => {
   });
 });
 
-//GET RESPONSE WITH FORMID AND RESPONSEID (FORMS, RESPONSES)
+// Get Response with FormID and ResponseID (Forms, Responses)
 app.get("/response-form/:formid/:responseid", (req, res) => {
   const formid = req.params.formid;
   const responseid = req.params.responseid;
@@ -148,7 +145,7 @@ app.get("/response-form/:formid/:responseid", (req, res) => {
   });
 });
 
-//GET RESPONSES WITH FORMID (RESPONSES)
+// Get Responses with FormID (Responses)
 app.get("/response-data/:formid", (req, res) => {
   const formid = req.params.formid;
   const sql = 'SELECT * FROM responses WHERE formid = ?';
@@ -159,13 +156,10 @@ app.get("/response-data/:formid", (req, res) => {
     }
     console.log(data[0].answers);
     return res.json(JSON.parse(data[0].answers));
-    
-    
   });
 });
 
-
-//GET USER DATA (CLIENT)
+// Get User Data (Client)
 app.get("/client-data", (req, res) => {
   const sql = "SELECT * FROM client";
   pool.query(sql, (err, data) => {
@@ -174,11 +168,12 @@ app.get("/client-data", (req, res) => {
   });
 });
 
-//CREATING FORM (FORMS)
+// Creating Form (Forms)
 app.post('/create-form', upload.single('logo'), async (req, res) => {
   const { tableName, columns, userdetails } = req.body;
-  const formId = generateFormId();
+  const formId = generateFormId(); // Generate a unique formId
   const logo = req.file ? req.file.filename : "";
+
   const formData = {
     formid: formId,
     userdetails: userdetails,
@@ -188,15 +183,19 @@ app.post('/create-form', upload.single('logo'), async (req, res) => {
   };
 
   const query = 'INSERT INTO forms SET ?';
-
+  
   try {
     pool.query(query, formData, (error, results) => {
       if (error) {
         console.error('Error executing query:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
-      res.status(201).json({ message: 'Form created successfully', formId });
-      console.log('Form created successfully');
+
+      // Respond with the success message and formId
+      res.status(201).json({
+        message: 'Form created successfully',
+        formId: formId // Send formId in the response
+      });
     });
   } catch (error) {
     console.error('Error creating form:', error);
@@ -204,7 +203,8 @@ app.post('/create-form', upload.single('logo'), async (req, res) => {
   }
 });
 
-//POST USER RESPONSE (RESPONSES)
+
+// Post User Response (Responses)
 app.post("/response", (req, res) => {
   const { answers, userData, formid } = req.body;
   const responseid = generateResponseId();
@@ -222,8 +222,8 @@ app.post("/response", (req, res) => {
         console.error('Error executing query:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
-      res.status(201).json({ message: 'Response send successfully' });
-      console.log('Response send successfully');
+      res.status(201).json({ message: 'Response sent successfully' });
+      console.log('Response sent successfully');
     });
   } catch (error) {
     console.error('Error sending response:', error);
@@ -231,20 +231,18 @@ app.post("/response", (req, res) => {
   }
 });
 
-//USER SIGNUP (CLIENT)
+// User Signup (Client)
 app.post("/signup-user", (req, res) => {
   const { name, email, phoneno, location, address } = req.body;
   const dbsql = 'SELECT * FROM client WHERE email = ?';
   const postsql = 'INSERT INTO client (`name`, `email`, `phoneno`, `location`, `address`) VALUES (?)';
   const values = [name, email, phoneno, location, address];
-
   pool.query(dbsql, [email], (err, data) => {
     if (err) {
       console.error('Database query error:', err);
       res.status(500).json({ error: 'Database query error' });
       return;
     }
-
     if (data.length > 0) {
       console.error('User already exists');
       res.status(409).json({ error: 'User Already Exists' });
@@ -262,7 +260,7 @@ app.post("/signup-user", (req, res) => {
   });
 });
 
-//ADMIN LOGIN (ADMINFORM)
+// Admin Login (AdminForm)
 app.post("/admin-login", (req, res) => {
   const { username, password } = req.body;
   const sql = `SELECT * FROM adminform WHERE email = '${username}'`;
@@ -283,7 +281,7 @@ app.post("/admin-login", (req, res) => {
   });
 });
 
-//DELETE CLIENT (CLIENT)
+// Delete Client (Client)
 app.delete("/delete-client/:id", (req, res) => {
   const sql = "DELETE FROM client WHERE id = (?)";
   const id = [req.params.id];
@@ -293,11 +291,9 @@ app.delete("/delete-client/:id", (req, res) => {
   });
 });
 
-
-module.exports = function (app) {
-  app.use('/api', createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true }));
-};
+// Middleware to proxy frontend requests to the backend
+app.use('/api', createProxyMiddleware({ target: 'http://form-maker.bedatatech.com', changeOrigin: true }));
 
 app.listen(4000, () => {
-  console.log(`Server is running on port http://localhost:4000`);
+  console.log(`Server is running on port http://form-maker-back.bedatatech.com:4000`);
 });

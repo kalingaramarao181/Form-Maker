@@ -12,3 +12,27 @@
     margin-top: 20px;
     align-self: flex-end;
 }
+.user-table-container{
+    width: 18vw;
+    align-self: flex-end;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.5vw;
+}
+.user-title{
+    text-align: center;
+    align-self: center;
+    font-size: 1.2vw;
+    font-weight: 700;
+}
+
+.user-side-head{
+    font-size: 1.1vw;
+    font-weight: 600;
+    padding: 0.3vw;
+}
+
+.user-name{
+    font-size: 1.5vw;
+    padding: 0.3vw;
+}

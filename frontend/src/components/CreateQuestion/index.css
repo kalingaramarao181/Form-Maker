@@ -74,9 +74,10 @@
 }
 
 .create-form-ok-button {
-    padding: 1vw;
+    padding: 0.5vw;
     font-size: 1vw;
     border-radius: 5px;
+    width: 5vw;
     border: none;
     background-color: #518341;
     color: white;
@@ -210,3 +211,29 @@
     margin-bottom: 5px;
     align-self: flex-end;
   }
+
+  .download-qr-button{
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #333;
+    height: 3vh;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    padding: 1vw;
+    color: black;
+    margin-bottom: 1vh;
+  }
+  .success-head{
+    font-size: 1.5vw;
+    margin: 0px;
+    margin-bottom: 1vh;
+    color: rgb(53, 48, 48);
+  }
+.success-button-container{
+    display: flex;
+}

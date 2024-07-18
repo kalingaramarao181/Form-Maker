@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
+import QRCode from 'qrcode.react';
 import "./index.css";
 import baseUrl from '../config';
 
@@ -10,8 +11,11 @@ const CreateQuestion = () => {
   const [submitted, setSubmitted] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [formLink, setFormLink] = useState('');
+  const [formId, setFormId] = useState('');
 
-  const candidateData = localStorage.getItem("candidateData") || null
+  const candidateData = localStorage.getItem("candidateData") || null;
+  const qrCodeCanvasRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -79,7 +83,6 @@ const CreateQuestion = () => {
         answer: (column.type === 'MCQ' || column.type === 'CheckBox') ? mapAnswerToOption(column) : column.answer
       }));
 
-      
       const formData = new FormData();
       formData.append('tableName', tableName);
       formData.append('columns', JSON.stringify(formattedColumns));
@@ -88,15 +91,16 @@ const CreateQuestion = () => {
         formData.append('logo', selectedFile);
       }
 
-      console.log('FormData to be sent:', ...formData.entries());
-      console.log(formData);
       try {
-        await axios.post(`${baseUrl}create-form`, formData, {
+        const response = await axios.post(`${baseUrl}create-form`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        alert('Form created successfully');
+        const { formId } = response.data; // Assuming formId is returned in the response
+        const link = `http://localhost:3000/form/${formId}`; // Generate the form link
+        setFormLink(link);
+        setFormId(formId);
         setSubmitted(true);
       } catch (error) {
         console.error('Error creating form:', error);
@@ -105,12 +109,65 @@ const CreateQuestion = () => {
     }
   };
 
+  const drawQRCode = () => {
+    const canvas = qrCodeCanvasRef.current;
+    const context = canvas.getContext('2d');
+
+    // Set the background color to white
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw the QR code on top
+    const qrCodeCanvas = document.getElementById('qrCode');
+    const qrCodeSize = 128; // Size of the QR code
+
+    // Calculate the position to center the QR code
+    const qrCodeX = (canvas.width - qrCodeSize) / 2;
+    const qrCodeY = (canvas.height - qrCodeSize) / 2;
+
+    context.drawImage(qrCodeCanvas, qrCodeX, qrCodeY, qrCodeSize, qrCodeSize);
+
+    // Add heading
+    context.font = '24px Arial';
+    context.fillStyle = 'black';
+    context.textAlign = 'center';
+    context.fillText('Scan the QR Code', canvas.width / 2, qrCodeY - 30);
+
+    // Add description
+    context.font = '18px Arial';
+    context.fillText('Use your phone to scan the QR code ', canvas.width / 2, qrCodeY + qrCodeSize + 30);
+
+  };
+
+  useEffect(() => {
+    if (submitted) {
+      drawQRCode();
+    }
+  }, [submitted]);
+
+  const downloadQRCode = () => {
+    const canvas = qrCodeCanvasRef.current;
+    if (canvas) {
+      const img = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = img;
+      link.download = 'qr_code.png';
+      link.click();
+    }
+  };
+
   if (submitted) {
     return (
       <div className='table-create-farm-container'>
-        <h1>Form created successfully!</h1>
-        <h1>Thank You</h1>
-        <Link to="/create-form"><button className='create-form-ok-button' onClick={() => window.location.reload()}>Ok</button></Link>
+        <h1 className='success-head'>Form created successfully!</h1>
+        <h1 className='success-head'>Thank You</h1>
+        <QRCode id="qrCode" value={formLink} size={128} style={{ display: 'none' }} />
+        <canvas ref={qrCodeCanvasRef} width={400} height={400} />
+        <p>{formLink}</p>
+        <div className='success-button-container'>
+          <button className='download-qr-button' onClick={downloadQRCode}>Download QR Code</button>
+          <Link to="/create-form"><button className='create-form-ok-button' onClick={() => window.location.reload()}>Ok</button></Link>
+        </div>
       </div>
     );
   }
@@ -194,15 +251,13 @@ const CreateQuestion = () => {
                     </button>
                   </div>
                 )}
-                {column.type && (
-                  <input
-                    className='form-answer-input'
-                    type="text"
-                    placeholder='Enter Correct Answer'
-                    value={column.answer}
-                    onChange={(e) => handleAnswerChange(columnIndex, e.target.value)}
-                  />
-                )}
+                <input
+                  className='form-answer-input'
+                  placeholder='Enter Answer'
+                  type="text"
+                  value={column.answer}
+                  onChange={(e) => handleAnswerChange(columnIndex, e.target.value)}
+                />
                 <button
                   type="button"
                   className='remove-question-button'
@@ -215,10 +270,10 @@ const CreateQuestion = () => {
           </div>
         ))}
         <div className='table-create-button-container'>
-          <button type="button" className='table-create-add-column-button' onClick={handleAddColumn}>
+          <button className='table-create-add-column-button' type="button" onClick={handleAddColumn}>
             Add Question
           </button>
-          <button type="submit" className='table-create-create-table-button'>Create Form</button>
+          <button className='table-create-create-table-button' type="submit">Submit</button>
         </div>
       </form>
     </div>

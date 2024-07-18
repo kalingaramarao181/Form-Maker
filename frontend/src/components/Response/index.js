@@ -9,13 +9,9 @@ const Response = () => {
     const [form, setForm] = useState({});
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
+    const [userData, setUserData] = useState({})
     const choices = ['A', 'B', 'C', 'D', 'E', 'F'];
     const formRef = useRef(); // Create a ref to the form component
-    const userData = {
-        mail: "user@gmail.com",
-        phoneNo: "7739028434",
-        name: "Suri",
-    }
 
     const { formid, responseid } = useParams(); // Get the formId from the URL
 
@@ -26,7 +22,7 @@ const Response = () => {
                     setForm(res.data[0]);
                     setQuestions(JSON.parse(res.data[0].questions));
                     setAnswers(JSON.parse(res.data[0].answers));
-                    console.log(JSON.parse(res.data[0].questions));
+                    setUserData(JSON.parse(res.data[0].userdata));
                 }
                 console.log(res.data[0]);
             })
@@ -60,7 +56,7 @@ const Response = () => {
                     correctCount++;
                 }
             }
-        });
+        }); 
         return correctCount;
     };
 
@@ -68,8 +64,6 @@ const Response = () => {
 
     return (
         <div className="form-table-form-container">
-            <div>
-            </div>
             <form ref={formRef} className="forms-table-form">
                 <div className="form-border-container">
                     <h1 className="form-title">{form.formname}</h1>
@@ -161,7 +155,7 @@ const Response = () => {
                         }
                         return null;
                     })}
-                    <p className="correct-answers-count">Correct Answers: {correctAnswersCount} out of {questions.length}</p>
+                    <p className="correct-answers-count"><span className="user-name">{userData.name}</span>: <span className="user-name">{correctAnswersCount}</span> out of <span className="user-name">{questions.length}</span></p>
                 </div>
             </form>
             <ReactToPrint
