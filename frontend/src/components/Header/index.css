@@ -82,6 +82,7 @@
     border-radius: 5px;
     width: 10vw;
     color: white;
+    font-size: 1.5vw;
     background-color: #9B5706;
   }
   .home-sidebar-span{
@@ -94,7 +95,29 @@
     border-radius: 5px;
     border: 1px solid white;
     margin-left: 0.8vw;
+    font-size: 1.2vw;
   }
   button{
     cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 50vw;
+      height: 30%;
+      background-color: #36366f;
+      position: fixed;
+      top: 10;
+      right: -50vw; /* Initially hide the sidebar on the right side */
+      transition: right 0.5s ease;
+      border-radius: 10px; /* Apply transition effect to right property */
+    }
+    .home-sidebar-login-button{
+      background-color: transparent;
+      padding: 1vw;
+      color: white;
+      border-radius: 1px;
+      border: 1px solid white;
+      margin-left: 0.8vw;
+      font-size: 1.5vw;
+    }
   }

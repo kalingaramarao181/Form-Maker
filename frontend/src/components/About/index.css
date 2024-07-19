@@ -1,4 +1,5 @@
-.containerabout {
+.containerabout,
+.containeraboutbelow {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -6,11 +7,11 @@
     background-size: cover;
     background-blend-mode: darken;
     padding-top: 10vh;
-
+    flex-wrap: wrap;
 }
 
-
-.about-content {
+.about-content,
+.about-content2 {
     width: 37vw;
     padding-bottom: 7vh;
     display: flex;
@@ -22,26 +23,24 @@
     font-size: 2.7vw;
     margin-bottom: 0px;
     font-weight: bold;
-
-
 }
 
 .about-main-para {
     align-items: center;
     font-family: roboto;
-
-
-
+}
+.form-features{
+    font-size: 1vw;
 }
 
 .about-image {
     height: 50vh;
+    width: auto;
 }
 
 .about-input {
     padding: 1vw;
     border-radius: 5px;
-
 }
 
 .about-button {
@@ -52,11 +51,11 @@
     background-color: #36366f;
     border: none;
     border-radius: 5px;
+    color: white;
 }
 
 .about-button:hover {
     background-color: #3131e6;
-
 }
 
 .about-span {
@@ -69,8 +68,6 @@
     padding: 1vw;
     background-color: #707977;
     margin: 1vh;
-
-
 }
 
 .about-features {
@@ -80,9 +77,7 @@
     width: 50vw;
     color: white;
     font-weight: bold;
-
-
-
+    font-size: 1vw;
 }
 
 .about-header-content {
@@ -93,10 +88,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-
-
-
 }
 
 .about-head-text {
@@ -105,8 +96,6 @@
     font-weight: bold;
     font-size: 3vw;
     color: white;
-
-
 }
 
 .about-head-paragraph {
@@ -116,9 +105,6 @@
     width: 45vw;
     font-size: 1.3vw;
     color: white;
-
-
-
 }
 
 .about-button-top {
@@ -131,6 +117,7 @@
     margin-top: 2vh;
     background-color: #f1aa10;
     font-size: 2vh;
+    color: white;
 }
 
 .about-feature-icon-container {
@@ -144,31 +131,134 @@
     color: white;
 }
 
-.containeraboutbelow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    background-size: cover;
-    background-blend-mode: darken;
-    padding-top: 10vh;
-
-
-}
-
-.about-content2 {
-    width: 37vw;
-    padding-bottom: 7vh;
-    display: flex;
-    flex-direction: column;
-    order: 1;
-}
-
 .about-swap-last {
     order: 0;
-
 }
 
 .videotag {
     height: 58vh;
+    width: 100%;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .containerabout,
+    .containeraboutbelow {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .about-content,
+    .about-content2 {
+        width: 80vw;
+    }
+
+    .about-main-heading {
+        font-size: 4vw;
+    }
+
+    .about-main-para {
+        font-size: 3vw;
+    }
+
+    .about-input {
+        padding: 2vw;
+    }
+
+    .about-button {
+        padding: 1.5vw;
+        font-size: 3vh;
+    }
+
+    .about-image,
+    .videotag {
+        height: auto;
+        width: 80vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-main-heading {
+        font-size: 5vw;
+    }
+
+    .about-main-para {
+        font-size: 3.5vw;
+    }
+
+    .about-input {
+        padding: 3vw;
+    }
+
+    .about-button {
+        padding: 2vw;
+        font-size: 4vh;
+    }
+
+    .about-header-content {
+        width: 90vw;
+        margin: 5vh auto;
+    }
+
+    .about-head-text {
+        font-size: 4vw;
+    }
+
+    .about-head-paragraph {
+        width: 80vw;
+        font-size: 2vw;
+    }
+
+    .about-button-top {
+        width: 30vw;
+        font-size: 2.5vw;
+    }
+
+    .about-features {
+        width: 80vw;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-main-heading {
+        font-size: 6vw;
+    }
+
+    .about-main-para {
+        font-size: 4vw;
+    }
+
+    .about-input {
+        padding: 4vw;
+    }
+
+    .about-button {
+        padding: 3vw;
+        font-size: 5vh;
+    }
+
+    .about-header-content {
+        width: 90vw;
+        margin: 5vh auto;
+    }
+
+    .about-head-text {
+        font-size: 5vw;
+    }
+
+    .about-head-paragraph {
+        width: 90vw;
+        font-size: 2.5vw;
+    }
+
+    .about-button-top {
+        width: 50vw;
+        font-size: 3vw;
+    }
+
+    .about-features {
+        width: 100vw;
+        flex-wrap: wrap;
+    }
 }

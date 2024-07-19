@@ -37,7 +37,7 @@ const Header = (props) => {
                         <><span className="home-sidebar-span">Already you are loged in</span>
                          <button onClick={onClickLogout} className="home-sidebar-login-button">Logout</button><span className="home-sidebar-span"> / </span>   
                          <Link to="/login">
-                            <button className="home-sidebar-login-button">Login</button>
+                            <button className="home-sidebar-login-button">Admin</button>
                         </Link>
                          </>:<>
                             <span className="home-sidebar-span">Already have an account? </span>

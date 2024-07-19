@@ -44,7 +44,7 @@ const ClintForm = (props) => {
             <div>
                 <img src="/images/signup-image.png" alt="signup" className="signup-image" />
             </div>
-            <form onSubmit={onSubmitForm} style={{ width: "40vw" }} className="forms-table-form">
+            <form onSubmit={onSubmitForm} style={{ width: "50vw" }} className="forms-table-form">
                 <h1>Client Form</h1>
                 <div className="forms-table-form-container">
                     <label className="forms-table-input-label">Name:</label>

@@ -9,3 +9,16 @@
     height: 60vh;
     width: 30vw;
 }
+@media (max-width: 768px) {
+    .form-table-client-form-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2vh;
+        align-items: center;
+    }
+    .signup-image{
+        height: 30vh;
+        width: 70vw;
+    }
+}

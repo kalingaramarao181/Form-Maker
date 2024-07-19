@@ -1,5 +1,5 @@
-import React from 'react'
-import './index.css'
+import React from 'react';
+import './index.css';
 import { FaFileSignature } from "react-icons/fa";
 
 const AboutUs = () => {
@@ -9,24 +9,25 @@ const AboutUs = () => {
         <div className='about-feature-icon-container'>
           <FaFileSignature className='about-iconfile' />
           <div className='about-features'>
-            <p>Features</p>
-            <p>Templates</p>
-            <p>Customers</p>
-            <p>Pricing</p>
-            <p>Integrations</p>
-            <p>Help</p>
+            <p className='form-features'>Features</p>
+            <p className='form-features'>Templates</p>
+            <p className='form-features'>Customers</p>
+            <p className='form-features'>Pricing</p>
+            <p className='form-features'>Integrations</p>
+            <p className='form-features'>Help</p>
           </div>
         </div>
         <div className='about-header-content'>
           <h1 className='about-head-text'>Online Form Maker</h1>
-          <p className='about-head-paragraph'>A Form Maker is a unique and user-friendly tool designed to create, customize, and manage various types of forms. Create custom forms easily with our online form maker - the perfect tool for all your business needs.</p>
+          <p className='about-head-paragraph'>
+            A Form Maker is a unique and user-friendly tool designed to create, customize, and manage various types of forms. Create custom forms easily with our online form maker - the perfect tool for all your business needs.
+          </p>
           <button className='about-button-top'>TRY - NOW</button>
         </div>
       </div>
       <div className="containerabout">
         <div className="about-content">
           <h1 className="about-main-heading">
-            {" "}
             Build forms effortlessly with our formMaker
           </h1>
           <p className="about-main-para">
@@ -37,7 +38,7 @@ const AboutUs = () => {
             placeholder="Enter Your Email"
             className="about-input"
           />
-          <button className="about-button"> submit</button>
+          <button className="about-button">submit</button>
         </div>
         <div>
           <img
@@ -50,23 +51,21 @@ const AboutUs = () => {
       <div className="containeraboutbelow">
         <div className="about-content2">
           <h1 className="about-main-heading">
-            {" "}
             Generate forms with multiple pages Save your progress and resume later with our form generator!
           </h1>
           <p className="about-main-para">
             Give your respondents the freedom with our forms creator to save partially filled forms and complete them at their convenience. Ensure that no data is lost, so form filling is an easy task instead of a tiresome one.
             Simplify complex form by sectioning them out as multiple pages. Structure forms in our online form builder software to contain relevant fields or questions on each page, and ensure that respondents are directed to pages with questions that pertain to them.
           </p>
-          <button className="about-button" style={{ color: "white" }}> View More</button>
+          <button className="about-button" style={{ color: "white" }}>View More</button>
         </div>
         <div className='about-swap-last'>
-          <iframe title="About Us Video" src='https://beedatatech.com/01_Important_Documents/YouCut_20240405_014633663.mp4' className='videotag' ></iframe>
+          <iframe title="About Us Video" src='https://beedatatech.com/01_Important_Documents/YouCut_20240405_014633663.mp4' className='videotag'></iframe>
         </div>
       </div>
       <div className="containerabout">
         <div className="about-content">
           <h1 className="about-main-heading">
-            {" "}
             Online form builder with free templates
           </h1>
           <p className="about-main-para">
@@ -82,9 +81,8 @@ const AboutUs = () => {
           />
         </div>
       </div>
-
     </>
   );
 }
 
-export default AboutUs
+export default AboutUs;

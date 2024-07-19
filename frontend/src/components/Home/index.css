@@ -7,13 +7,16 @@
     background: rgba(102, 102, 102, 0.7) url("https://img.freepik.com/premium-photo/desk-with-laptop-papers-it_902049-11200.jpg");
     background-size: cover;
     background-blend-mode: darken;
+    padding: 10px;
 }
+
 .home-content {
     width: 37vw;
     padding-bottom: 7vh;
     display: flex;
     flex-direction: column;
 }
+
 .home-main-heading {
     font-family: roboto;
     font-size: 2.7vw;
@@ -21,19 +24,23 @@
     color: white;
     font-weight: bold;
 }
+
 .home-main-para {
     align-items: center;
     font-family: roboto;
     color: white;
 }
+
 .main-image {
     height: 50vh;
     width: 40vw;
 }
+
 .home-input {
     padding: 1vw;
     border-radius: 5px;
 }
+
 .home-button {
     padding: 0.8vw;
     margin-top: 2vh;
@@ -44,10 +51,85 @@
     border: none;
     border-radius: 5px;
 }
+
 .home-button:hover {
     background-color: #3131e6;
-
 }
+
 .home-span {
     color: rgb(245, 180, 40);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .containerhome {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .home-content {
+        width: 80vw;
+        padding-bottom: 3vh;
+    }
+
+    .home-main-heading {
+        font-size: 4vw;
+    }
+
+    .main-image {
+        height: auto;
+        width: 80vw;
+    }
+
+    .home-input {
+        padding: 2vw;
+    }
+
+    .home-button {
+        padding: 1.5vw;
+        font-size: 3vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .containerhome {
+        padding: 20px;
+    }
+
+    .home-main-heading {
+        font-size: 5vw;
+    }
+
+    .main-image {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .home-input {
+        padding: 3vw;
+    }
+
+    .home-button {
+        padding: 2vw;
+        font-size: 4vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-main-heading {
+        font-size: 6vw;
+    }
+
+    .home-main-para {
+        font-size: 4vw;
+    }
+
+    .home-input {
+        padding: 4vw;
+    }
+
+    .home-button {
+        padding: 3vw;
+        font-size: 5vh;
+    }
 }

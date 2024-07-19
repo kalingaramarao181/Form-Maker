@@ -6,59 +6,115 @@
     flex-direction: column;
     align-items: center;
     backdrop-filter: blur(15px);
-}
-
-.admin-container {
+    padding: 2vw; /* Add padding for smaller screens */
+  }
+  
+  .admin-container {
     display: flex;
     flex-direction: column;
     margin: 4vh;
     background-color: white;
-    width: 35vw;
+    width: 80vw; /* Adjust width for smaller screens */
+    max-width: 500px; /* Set a maximum width */
     border-radius: 1vh;
     box-shadow: 0 2px 8px 0 rgba(241, 238, 238, 0.2), 0 4px 20px 0 rgba(248, 231, 231, 0.555);
     padding: 3vh;
-}
-
-.main-heading {
-    margin-top: 0px;
+  }
+  
+  .main-heading {
+    margin-top: 0;
     color: white;
     text-align: center;
     font-size: 6vh;
     font-family: roboto;
     padding: 4vh;
-}
-
-.admin-login-heading {
+  }
+  
+  .admin-login-heading {
     text-align: center;
     font-family: roboto;
-}
-
-.admin-input {
+  }
+  
+  .admin-input {
     padding: 1.6vh;
     margin: 1vh;
     border-radius: 0.5vh;
-}
-
-.admin-labels {
-    font-size: 1.5vw;
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+  
+  .admin-labels {
+    font-size: 1rem; /* Adjust font size for smaller screens */
     font-family: roboto;
     padding: 1vh;
-    padding-bottom: 0px;
-}
-
-.admin-submit {
+    padding-bottom: 0;
+  }
+  
+  .admin-submit {
     padding: 1.6vh;
     margin: 1vh;
     border-radius: 0.5vh;
     background-color: #04AA6D;
     border: none;
-    font-size: 1.3vw;
+    font-size: 1rem; /* Adjust font size for smaller screens */
     color: white;
     font-weight: bold;
-}
-.login-error-message{
+  }
+  
+  .login-error-message {
     color: red;
-    font-size: 1.5vw;
+    font-size: 1rem; /* Adjust font size for smaller screens */
     text-align: right;
-    margin-top: 0px;
-}
+    margin-top: 0;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 1024px) {
+    .main-heading {
+      font-size: 5vh;
+    }
+  
+    .admin-container {
+      width: 90vw; /* Increase width for tablets */
+    }
+  
+    .admin-input, .admin-labels, .admin-submit {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .admin-main-container {
+      padding: 4vw; /* Increase padding for tablets */
+    }
+  
+    .admin-container {
+      width: 90vw; /* Increase width for tablets */
+    }
+  
+    .main-heading {
+      font-size: 4vh;
+    }
+  
+    .admin-input, .admin-labels, .admin-submit {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .admin-main-container {
+      padding: 5vw; /* Increase padding for mobile devices */
+    }
+  
+    .admin-container {
+      width: 95vw; /* Increase width for mobile devices */
+    }
+  
+    .main-heading {
+      font-size: 3.5vh;
+    }
+  
+    .admin-input, .admin-labels, .admin-submit {
+      font-size: 0.9rem;
+    }
+  }
+  

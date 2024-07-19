@@ -1,4 +1,5 @@
-.containerform {
+.containerform,
+.containerform2 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -6,7 +7,11 @@
   height: 90vh;
   background-size: cover;
   background-blend-mode: darken;
+  flex-wrap: wrap;
+}
 
+.forms-features{
+  font-size: 1.5vw;
 }
 
 .form-feature-container {
@@ -29,52 +34,37 @@
   margin-bottom: 0vw;
 }
 
-.form-content {
-  width: 37vw;
-  padding-bottom: 7vh;
-  display: flex;
-  flex-direction: column;
-  order: 0;
-}
-
-.containerform2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 90vh;
-  background-size: cover;
-  background-blend-mode: darken;
-}
-
-.form-content1 {
-  width: 37vw;
-  padding-bottom: 7vh;
-  display: flex;
-  flex-direction: column;
-  order: 1;
-}
-
+.form-content,
+.form-content1,
 .forn-content-2 {
+  width: 37vw;
+  padding-bottom: 7vh;
+  display: flex;
+  flex-direction: column;
   order: 0;
 }
+
 .form-main-heading {
   font-family: roboto;
   font-size: 2.7vw;
   margin-bottom: 20px;
   font-weight: bold;
 }
+
 .form-main-para {
   align-items: center;
   font-family: roboto;
 }
+
 .form-main-image {
   height: 70vh;
 }
+
 .form-input {
   padding: 1vw;
   border-radius: 5px;
 }
+
 .form-button {
   padding: 0.8vw;
   margin-top: 2vh;
@@ -85,9 +75,11 @@
   border: none;
   border-radius: 5px;
 }
+
 .form-button:hover {
   background-color: #3131e6;
 }
+
 .form-span {
   color: rgb(245, 180, 40);
 }
@@ -112,7 +104,6 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
 }
 
 .footer2 {
@@ -127,16 +118,8 @@ footer {
   font-size: 2vw;
 }
 
-.fotter-containt-icons-linkedin {
-  font-size: 2.5vw;
-  color: black;
-}
-
-.fotter-containt-icons-facebook {
-  font-size: 2.5vw;
-  color: black;
-}
-
+.fotter-containt-icons-linkedin,
+.fotter-containt-icons-facebook,
 .fotter-containt-icons-insta {
   font-size: 2.5vw;
   color: black;
@@ -150,4 +133,145 @@ footer {
 .all-footer-icons {
   padding-top: 9vh;
   margin-left: 2vw;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .containerform,
+  .containerform2 {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .form-content,
+  .form-content1,
+  .forn-content-2 {
+    width: 80vw;
+  }
+
+  .form-main-heading {
+    font-size: 4vw;
+  }
+
+  .form-main-para {
+    font-size: 3vw;
+  }
+
+  .form-input {
+    padding: 2vw;
+  }
+
+  .form-button {
+    padding: 1.5vw;
+    font-size: 3vh;
+  }
+
+  .form-main-image {
+    height: auto;
+    width: 80vw;
+  }
+
+  .form-heading-2page {
+    font-size: 5vh;
+    padding: 5vw;
+  }
+
+  .fotter-containt {
+    font-size: 3vw;
+  }
+
+  .fotter-containt-icons-linkedin,
+  .fotter-containt-icons-facebook,
+  .fotter-containt-icons-insta {
+    font-size: 4vw;
+  }
+
+  .fotter-containt-icons-twitter {
+    font-size: 6vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-main-heading {
+    font-size: 5vw;
+  }
+
+  .form-main-para {
+    font-size: 3.5vw;
+  }
+
+  .form-input {
+    padding: 3vw;
+  }
+
+  .form-button {
+    padding: 2vw;
+    font-size: 4vh;
+  }
+
+  .form-main-image {
+    width: 90vw;
+  }
+
+  .form-heading-2page {
+    font-size: 5vh;
+    padding: 5vw;
+  }
+
+  .fotter-containt {
+    font-size: 4vw;
+  }
+
+  .fotter-containt-icons-linkedin,
+  .fotter-containt-icons-facebook,
+  .fotter-containt-icons-insta {
+    font-size: 5vw;
+  }
+
+  .fotter-containt-icons-twitter {
+    font-size: 7vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-main-heading {
+    font-size: 6vw;
+  }
+
+  .form-main-para {
+    font-size: 4vw;
+  }
+
+  .form-input {
+    padding: 4vw;
+  }
+
+  .form-button {
+    padding: 3vw;
+    font-size: 5vh;
+  }
+
+  .form-main-image {
+    width: 80vw;
+  }
+
+  .form-heading-2page {
+    font-size: 6vh;
+    padding: 10vw;
+  }
+
+  .fotter-containt {
+    font-size: 5vw;
+  }
+
+  .fotter-containt-icons-linkedin,
+  .fotter-containt-icons-facebook,
+  .fotter-containt-icons-insta {
+    font-size: 6vw;
+  }
+
+  .fotter-containt-icons-twitter {
+    font-size: 8vw;
+  }
 }

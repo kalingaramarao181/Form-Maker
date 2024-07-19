@@ -1,135 +1,261 @@
 .page-container {
-    height: 88vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .page-navbar {
-    background-color: #0d2436;
-    font-family: "Roboto";
-    font-size: 20px;
-    color: white;
-    padding: 1.5vw;
-  }
-  
-  .page-body {
-    flex-grow: 1;
-    overflow-y: auto;
-    display: flex;
-  }
-  
-  .admin-sidebar {
-    width: 16vw;
-    padding: 1vw;
-    background-color: #030131;
-    font-family: "Roboto";
-    font-size: 1.6vw;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  .content {
-    background-color: #f6f8fa;
-    font-family: "Roboto";
-    font-size: 1.2vw;
-    flex-grow: 1;
-    overflow-y: auto;
-  }
-  
-  .page-footer {
-    background-color: #0d2436;
-    font-family: "Roboto";
-    font-size: 1.6vw;
-    color: white;
-    padding: 1vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 3vh;
-  }
-  .admin-sidebar-button{
-    background-color: transparent;
-    border: none;
-    font-size: 1.5vw;
-    padding: 1vw;
-    margin-bottom: 1vh;
-    color: white;
-    width: 16vw;
-    text-align: left;
-  }
-  .admin-sidebar-button:hover{
-    background-color: #0E0C49;
-  }
-  .social-icon{
-    margin-right: 0.5vw;
-   
-  }
-  .content-us{
-    margin: 0px;
-    padding: 0px;
-  }
-  .admin{
-    font-size: 5vw;
-    text-align: center;
-    font-family: roboto;
-  }
-  .admin-image{
-    height: 15vh;
-    width: 13vw;
-    align-self: center;
-    margin-bottom: 5vh;
-  }
-  .admin-logout-button{
-    background-color: #8c0404;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.5vw;
-    width: 10vw;
-    height: 5vh;
-    align-self: flex-end;
-  }
-  .admin-cards-container{
-    width: 80vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .admin-buttons-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
 
+.page-navbar {
+  background-color: #0d2436;
+  font-family: "Roboto";
+  font-size: 20px;
+  color: white;
+  padding: 1.5vw;
+}
 
-  .Admin-card1{
-    box-shadow: 0 2px 8px 0 rgba(121, 117, 117, 0.678), 0 4px 20px 0 rgba(105, 102, 102, 0.603);
-    width: 20vw;
-    text-align: center;
-    margin: 20px;
-    padding: 10px;
-    border-radius: 1vw;
-    font-family: roboto;
+.page-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
 }
-.admin-full-container{
-    display: flex;
-    flex-direction: row;
+
+.admin-sidebar {
+  width: 16vw;
+  padding: 1vw;
+  background-color: #030131;
+  font-family: "Roboto";
+  font-size: 1.6vw;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.admin-button-select{
-    background-color: rgb(103, 71, 255);
-    border: none;
-    padding: 7px;
-    font-weight: bold;
-    border-radius: 4px;
-    color: white;
+
+.content {
+  background-color: #f6f8fa;
+  font-family: "Roboto";
+  font-size: 1.2vw;
+  flex-grow: 1;
+  overflow-y: auto;
 }
-.admin-image-botton{
+
+.page-footer {
+  background-color: #0d2436;
+  font-family: "Roboto";
+  font-size: 1.6vw;
+  color: white;
+  padding: 1vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 3vh;
+}
+
+.admin-sidebar-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5vw;
+  padding: 1vw;
+  margin-bottom: 1vh;
+  color: white;
+  width: 16vw;
+  text-align: left;
+}
+
+.admin-sidebar-button:hover {
+  background-color: #0E0C49;
+}
+
+.social-icon {
+  margin-right: 0.5vw;
+}
+
+.content-us {
+  margin: 0;
+  padding: 0;
+}
+
+.admin {
+  font-size: 5vw;
+  text-align: center;
+  font-family: roboto;
+}
+
+.admin-image {
+  height: 15vh;
+  width: 13vw;
+  align-self: center;
+  margin-bottom: 5vh;
+}
+
+.admin-logout-button {
+  background-color: #8c0404;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5vw;
+  width: 10vw;
+  height: 5vh;
+  align-self: flex-end;
+}
+
+.admin-cards-container {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Admin-card1 {
+  box-shadow: 0 2px 8px 0 rgba(121, 117, 117, 0.678), 0 4px 20px 0 rgba(105, 102, 102, 0.603);
+  width: 20vw;
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 1vw;
+  font-family: roboto;
+}
+
+.admin-full-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Wrap cards on smaller screens */
+  justify-content: center;
+}
+
+.admin-button-select {
+  background-color: rgb(103, 71, 255);
+  border: none;
+  padding: 7px;
+  font-weight: bold;
+  border-radius: 4px;
+  color: white;
+}
+
+.admin-image-botton {
   background-color: transparent;
   border: none;
   align-self: center;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .page-navbar {
+    font-size: 18px;
+    padding: 1vw;
+  }
+
+  .admin-sidebar {
+    width: 20vw;
+    font-size: 1.4vw;
+  }
+
+  .content {
+    font-size: 1vw;
+  }
+
+  .page-footer {
+    font-size: 1.4vw;
+    padding: 1vw;
+  }
+
+  .admin-sidebar-button {
+    font-size: 1.4vw;
+    width: 20vw;
+  }
+
+  .admin-image {
+    width: 15vw;
+  }
+
+  .admin-logout-button {
+    font-size: 1.4vw;
+    width: 12vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-navbar {
+    font-size: 16px;
+    padding: 1.5vw;
+  }
+
+  .admin-sidebar {
+    width: 25vw;
+    font-size: 1.2vw;
+  }
+
+  .content {
+    font-size: 1rem;
+  }
+
+  .page-footer {
+    font-size: 1.2vw;
+    padding: 1.5vw;
+  }
+
+  .admin-sidebar-button {
+    font-size: 1.2vw;
+    width: 25vw;
+  }
+
+  .admin-image {
+    width: 20vw;
+  }
+
+  .admin-logout-button {
+    font-size: 1.2vw;
+    width: 15vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-navbar {
+    font-size: 14px;
+    padding: 2vw;
+  }
+
+  .admin-sidebar {
+    width: 30vw;
+    font-size: 1rem;
+  }
+
+  .content {
+    font-size: 0.9rem;
+  }
+
+  .page-footer {
+    font-size: 1rem;
+    padding: 2vw;
+  }
+
+  .admin-sidebar-button {
+    font-size: 1rem;
+    width: 30vw;
+  }
+
+  .admin-image {
+    width: 25vw;
+  }
+
+  .admin-logout-button {
+    font-size: 1rem;
+    width: 20vw;
+  }
+
+  .admin-full-container {
+    flex-direction: column; /* Stack cards vertically on mobile */
+  }
+
+  .Admin-card1 {
+    width: 80vw; /* Adjust width for mobile */
+  }
 }
