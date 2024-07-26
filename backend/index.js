@@ -8,6 +8,8 @@ const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
 const path = require('path');
+const nodemailer = require('nodemailer');
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -44,24 +46,33 @@ function generateToken(payload) {
 }
 
 // Validation for User Authentication
-function validateToken(req, res, next) {
+const validateToken = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ error: 'Token is missing' });
+    }
+
+    const token = authHeader.split(' ')[1];
     if (!token) {
       return res.status(401).json({ error: 'Token is missing' });
     }
+
+    // Assuming tokens is a global object or use a persistent store
     if (!tokens[token]) {
       tokens[token] = 0;
     }
+
     if (tokens[token] >= 6) {
       return res.status(401).json({ error: 'Token usage limit exceeded' });
     }
+
     tokens[token]++;
     next();
   } catch (error) {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+};
 
 // Database Connection
 const pool = mysql.createPool({
@@ -74,11 +85,17 @@ const pool = mysql.createPool({
 
 // Protection for User
 app.get('/protected-route', validateToken, (req, res) => {
-  const token = req.headers.authorization.split(' ')[1];
-  if (!tokens[token]) {
-    return res.json({ error: "Token no longer valid" });
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Token is missing' });
   }
-  return res.json({ message: 'Protected route accessed' });
+
+  const token = authHeader.split(' ')[1];
+  if (!tokens[token]) {
+    return res.status(401).json({ error: 'Token no longer valid' });
+  }
+
+  res.json({ message: 'Protected route accessed' });
 });
 
 // Get All Forms (Forms)
@@ -183,7 +200,7 @@ app.post('/create-form', upload.single('logo'), async (req, res) => {
   };
 
   const query = 'INSERT INTO forms SET ?';
-  
+
   try {
     pool.query(query, formData, (error, results) => {
       if (error) {
@@ -294,6 +311,110 @@ app.delete("/delete-client/:id", (req, res) => {
 // Middleware to proxy frontend requests to the backend
 app.use('/api', createProxyMiddleware({ target: 'http://form-maker.bedatatech.com', changeOrigin: true }));
 
+app.post('/send-email', upload.single('file'), (req, res) => {
+  const { email, name, questions, currectAnswers } = req.body;
+  const filePath = req.file.path;
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465, // or 587 for TLS
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: 'bdtemployeestatus@gmail.com',
+      pass: 'pmjwjulscjvelncd'
+    }
+  });
+
+  const options = {
+    from: 'bdtemployeestatus@gmail.com',
+    to: email,
+    subject: "Results PDF",
+    text: "Please find the attached PDF containing your form responses.",
+    html: `<!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Email Template</title>
+        <style>
+          body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+          }
+      
+          .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+      
+          .header {
+            text-align: center;
+            margin-bottom: 20px;
+          }
+      
+          .logo {
+            max-width: 100%;
+            height: auto;
+          }
+      
+          .content {
+            text-align: justify;
+            margin-bottom: 20px;
+          }
+      
+          .button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #ffffff;
+            border-radius: 3px;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <img class="logo" src="https://beedatatech.com/01_Important_Documents/RecoF-1.png" alt="Company Logo">
+            <h1>RECO FORM</h1>
+          </div>
+      
+          <div class="content">
+            <p>
+              Hello ${name},
+            </p>
+            <p>
+              You Got ${currectAnswers} Out of ${questions}.<br/>
+            </p>
+          </div>
+        </div>
+      </body>
+      </html>`,
+    attachments: [
+      {
+        filename: 'response.pdf',
+        path: filePath,
+        contentType: 'application/pdf'
+      }
+    ]
+  };
+
+  transporter.sendMail(options, function (err, success) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json("Successfully Send");
+    }
+  });
+});
+
 app.listen(4000, () => {
-  console.log(`Server is running on port http://form-maker-back.bedatatech.com:4000`);
+  console.log(`Server is running on port http://form-maker-back.bedatatech.com`);
 });

@@ -64,9 +64,14 @@ const ClientData = (props) => {
 
   //DELETE CLIENT
   const deleteHandler = (id) => {
-    alert("successfully deleted")
     axios.delete(`${baseUrl}delete-client/` + id)
-      .then(res => console.log(res.data))
+      .then(res =>     {
+        alert("User Deleted Successfully")
+        window.location.reload()
+      }
+    ).catch((err) => {
+      alert("Error Deleting User")
+    })
   }
 
   const renderFormDetails = () => {
@@ -144,9 +149,9 @@ const ClientData = (props) => {
               <tr key={each.id} className="tabledata-details">
                 <td className="table-header">{index + 1}</td>
                 <td className="table-header">{each.name}</td>
-                <td className="table-header">{each.email}</td>
-                <td className="table-header">{each.phonenumber}</td>
-                <td className="table-header">{each.locaton}</td>
+                <td className="table-header">{each.email}</td>  
+                <td className="table-header">{each.phoneno}</td>
+                <td className="table-header">{each.location}</td>
                 <td className="table-header">{each.address}</td>
                 <td className="table-header"><button onClick={() => deleteHandler(each.id)} className="delete-button" >Delete</button></td>
                 <td className="table-header"><button onClick={() => onClickForms(each.email, each.name)} className="data-button">Forms</button></td>

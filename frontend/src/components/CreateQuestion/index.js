@@ -10,9 +10,9 @@ const CreateQuestion = () => {
   const [columns, setColumns] = useState([{ type: '', question: '', options: [''], answer: '' }]);
   const [submitted, setSubmitted] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null); 
   const [formLink, setFormLink] = useState('');
-  const [formId, setFormId] = useState('');
+  const [setFormId] = useState('');
 
   const candidateData = localStorage.getItem("candidateData") || null;
   const qrCodeCanvasRef = useRef(null);

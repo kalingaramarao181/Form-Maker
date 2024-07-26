@@ -28,7 +28,7 @@ function App() {
         <Route path='/response/:formid/:responseid' exact component={Response} />
         <Route path='/Forms' exact component={Forms} />
         <Route path="/form/:formid" exact component={Form} />
-        <ProtectedRoute path="/forms-data" exact component={FormsData} />
+        <Secure path="/forms-data" exact component={FormsData} />
         <Route path="/form-responses" exact component={SurveyFormData} />
         <Route path="/login" exact component={LoginForm} />
         <Route path="/client-form" exact component={ClientForm} />

@@ -86,7 +86,7 @@ const Pricing = () => {
             </Link>
             {qrScan && <a href={qrScan}>Go</a>}
           </div>
-          <img src='https://proofeasy.io/wp-content/uploads/2021/04/planpricing.png' alt='pricing-img' />
+          <img src='/images/pricing.png' className='pricing-image' alt='pricing-img' />
         </div>
       </div>
     </div>

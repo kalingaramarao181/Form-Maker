@@ -66,7 +66,7 @@
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    height: 21vh;
+    height: 23vh;
     box-shadow: 0 2px 8px 0 rgba(14, 13, 13, 0.678), 0 4px 20px 0 rgba(0, 0, 0, 0.603);
     cursor: pointer;
 }
@@ -89,4 +89,48 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+}
+.open-share-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 7.3vw;
+}
+.open-button, .share-button{
+    font-size: 0.8vw;
+    border: none;
+    border-radius: 0.2vw;
+    width: 3.5vw;
+    height: 1.5vw;
+    color: white;
+}
+.open-button{
+    background-color: rgb(76, 139, 116);
+}
+.share-button{
+    background-color: rgb(179, 136, 6);
+}
+.share-popup-view{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.qr-heading{
+    font-size: 1.5vw;
+}
+.qr-link{
+    font-size: 1.5vw;
+    margin-bottom: 1vh;
+}
+.ok-button{
+    background-color: green;
+    font-size: 1.2vw;
+    border: none;
+    width: 5vw;
+    height: 4vh;
+    border-radius: 0.2vw;
+    color: white;
+    font-size: "Roboto";
 }

@@ -3,13 +3,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import baseUrl from "../config";
 import ReactToPrint from "react-to-print";
-import "./index.css"
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import "./index.css";
 
 const Response = () => {
     const [form, setForm] = useState({});
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState({});
     const choices = ['A', 'B', 'C', 'D', 'E', 'F'];
     const formRef = useRef(); // Create a ref to the form component
 
@@ -28,6 +30,8 @@ const Response = () => {
             })
             .catch(err => console.log(err));
     }, [formid, responseid]);
+
+    
 
     const isCorrectAnswer = (question, option) => {
         if (question.type === "MCQ") {
@@ -56,11 +60,40 @@ const Response = () => {
                     correctCount++;
                 }
             }
-        }); 
+        });
         return correctCount;
     };
 
     const correctAnswersCount = calculateCorrectAnswers();
+
+
+    const handleSendMail = async () => {
+        try {
+            const canvas = await html2canvas(formRef.current);
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, "PNG", 0, 0);
+            const pdfBlob = pdf.output("blob");
+
+            const formData = new FormData();
+            formData.append("file", pdfBlob, "response.pdf");
+            formData.append("email", userData.email); // Pass user email
+            formData.append("name", userData.name);   // Pass user name
+            formData.append("questions", questions.length)
+            formData.append("currectAnswers", correctAnswersCount)
+
+            await axios.post(`${baseUrl}send-email`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+
+            alert("Send mail Successfully");
+        } catch (error) {
+            console.error("Error generating or sending PDF:", error);
+            alert("Error Sending Mail");
+        }
+    };
 
     return (
         <div className="form-table-form-container">
@@ -162,6 +195,7 @@ const Response = () => {
                 trigger={() => <button className="print-button">Print PDF</button>}
                 content={() => formRef.current}
             />
+            <button className="send-mail-button" type="submit" onClick={handleSendMail}>Send Mail</button>
         </div>
     );
 };
